@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n-title="page_title_shipping">♡ shipping calculator   </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baskervville:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Unified global templates and translations -->
+    <script src="/lang-switch.js"></script>
+    <script src="/site-header.js"></script>
+    <link rel="stylesheet" href="/style.css">
+    
+    <style>
+       :root {
+            --bg-cream: #fff9ed;
+            --text-dark: #3a302a;
+            --text-sepia: #4e3f34;
+            --text-espresso: #4e3f34;    
+            --text-light-sepia: #645246;
+            --accent-rose: #b55568;
+            --accent-rose-faint: #f9f2ed; 
+            --border-soft: #3a302a85;
+            --border-thin: #3a302a10;      
+        }
+
+        body {
+            background-color: var(--bg-cream);
+            color: var(--text-sepia);
+            font-family: 'Baskervville', serif;
+            font-size: 0.9rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .top-navigation-bar {
+            max-width: 960px;
+            margin: 1.5rem auto 0 auto;
+            padding: 0 1rem;
+        }
+
+        .shipping-header {
+            text-align: center;
+            max-width: 550px;
+            margin: 1.5rem auto 1.5rem auto;
+            padding: 0 1rem;
+        }
+       .shipping-header h1 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--text-sepia);
+            margin-bottom: 0.3rem;
+            letter-spacing: -0.01em;
+        }
+        .shipping-subtext {
+            font-style: italic;
+            font-size: 0.88rem;
+            color: var(--accent-rose);
+            opacity: 0.85;
+            margin-top: 0.4rem;
+        }
+        .update-timestamp {
+            font-size: 0.75rem;
+            text-transform: lowercase;
+            letter-spacing: 0.03em;
+            opacity: 0.6;
+            margin-top: 0.3rem;
+            font-style: italic;
+            color: var(--text-light-sepia);
+        }
+
+        .calc-container {
+            max-width: 960px;
+            margin: 0 auto 4rem auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 1.5rem;
+        }
+        @media (max-width: 850px) {
+            .calc-container {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        .selection-section h3 {
+            font-size: 0.95rem;
+            font-weight: 400;
+            font-style: italic;
+            margin-bottom: 0.6rem;
+            color: var(--text-sepia);
+        }
+        
+        .section-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.6rem;
+        }
+        .action-links-group {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        .clear-all-link, .back-to-order-link {
+            font-size: 0.8rem;
+            font-style: italic;
+            color: var(--text-light-sepia);
+            cursor: pointer;
+            text-decoration: underline;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+        .clear-all-link:hover, .back-to-order-link:hover {
+            color: var(--accent-rose);
+        }
+
+        .country-selector {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+        .country-radio-card {
+            flex: 1;
+            border: 1px solid var(--border-soft);
+            background: #fffff0;
+            padding: 0.6rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-family: 'Baskervville', serif;
+            font-size: 0.95rem;
+            color: var(--text-sepia);
+            transition: all 0.2s ease;
+        }
+        .country-radio-card.active {
+            border-color: var(--accent-rose);
+            background-color: var(--accent-rose-faint);
+            box-shadow: inset 0 0 0 1px var(--accent-rose);
+        }
+
+        .radio-circle {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            border: 1px solid rgba(107, 90, 80, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fffff0;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+        }
+        .country-radio-card.active .radio-circle::after,
+        .goods-card.selected .radio-circle::after {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--accent-rose);
+            border-radius: 50%;
+        }
+
+        .goods-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.6rem;
+        }
+        @media (max-width: 550px) {
+            .goods-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .goods-card {
+            border: 1px solid var(--border-soft);
+            background: #fffff0;
+            padding: 0.6rem 0.8rem;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+        .goods-card.selected {
+            border-color: var(--accent-rose);
+            background-color: var(--accent-rose-faint);
+        }
+
+        .goods-clickable-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            cursor: pointer;
+            flex: 1;
+            padding-right: 0.25rem;
+        }
+        .goods-info-block {
+            display: flex;
+            flex-direction: column;
+            gap: 0.05rem;
+        }
+        .goods-name {
+            font-size: 0.88rem;
+            color: var(--text-sepia);
+        }
+        .goods-price-tag {
+            font-size: 0.78rem;
+            color: var(--text-light-sepia);
+            font-style: italic;
+        }
+
+        .quantity-widget {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(3px);
+            transition: all 0.15s ease;
+        }
+        .goods-card.selected .quantity-widget {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+        .qty-action-btn {
+            background: #fffff0;
+            border: 1px solid var(--border-soft);
+            width: 18px;
+            height: 18px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-sepia);
+        }
+        .qty-action-btn:hover {
+            background-color: rgba(107, 90, 80, 0.05);
+        }
+        .qty-current-value {
+            font-size: 0.85rem;
+            min-width: 10px;
+            text-align: center;
+            color: var(--accent-rose);
+        }
+
+        .sticky-summary-panel {
+            position: sticky;
+            top: 60px;
+            height: fit-content;
+        }
+        .summary-card {
+            border: 1px solid var(--border-soft);
+            background: #fffff0;
+            padding: 1.4rem;
+            border-radius: 5px;
+        }
+        .summary-title {
+            font-family: 'Baskervville', serif;
+            font-size: 1.1rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            color: var(--text-sepia);
+            border-bottom: 1px dashed var(--border-soft);
+            padding-bottom: 0.4rem;
+        }
+        .manifest-breakdown {
+            max-height: 150px;
+            overflow-y: auto;
+            margin-bottom: 0.8rem;
+        }
+        .breakdown-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-light-sepia);
+        }
+        .total-box {
+            border-top: 1px solid var(--border-soft);
+            padding-top: 0.8rem;
+            margin-top: 0.8rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+        }
+        .total-label {
+            font-size: 0.85rem;
+            font-style: italic;
+            color: var(--accent-rose);
+        }
+        .total-amount {
+            font-size: 1.45rem; 
+            font-weight: bold;
+            color: var(--text-sepia);
+            font-family: 'Baskervville', serif;
+        }
+    </style>
+</head>
+<body>
+
+    <header id="global-header" class="site-header fade-up"></header>
+
+    <main class="main-container fade-up delay-1">
+        <div class="top-navigation-bar">
+            <a href="/order" class="back-to-order-link" data-i18n="shipping_return_link">← return to order selections.</a>
+        </div>
+
+        <div class="shipping-header">
+            <h1 data-i18n="shipping_main_title">♡ calculate your shipping fees </h1>
+            <p class="shipping-subtext" data-i18n="shipping_main_subtitle">calculate and predict shipping costs for your items before even checkout</p>
+            <div class="update-timestamp" id="live-date-stamp">last update: 06/20/2026</div>
+        </div>
+
+        <div class="calc-container fade-up delay-2">
+            <div class="selection-section">
+                <h3 data-i18n="shipping_select_country_header">♡ select a country.</h3>
+                <div class="country-selector">
+                    <button type="button" class="country-radio-card active" id="btn-japan" onclick="setCountry('japan')">
+                        <div class="radio-circle"></div>
+                        <span data-i18n="shipping_country_jp">japan</span>
+                    </button>
+                    <button type="button" class="country-radio-card" id="btn-thailand" onclick="setCountry('thailand')">
+                        <div class="radio-circle"></div>
+                        <span data-i18n="shipping_country_th">thailand</span>
+                    </button>
+                </div>
+
+                <div class="section-title-row">
+                    <h3 data-i18n="shipping_select_goods_header">♡ select the type of goods.</h3>
+                    <div class="action-links-group">
+                        <button type="button" class="clear-all-link" onclick="clearAllSelections()" data-i18n="shipping_clear_btn">clear all selections</button>
+                    </div>
+                </div>
+                <div class="goods-grid" id="goods-container"></div>
+            </div>
+
+            <div class="sticky-summary-panel">
+                <div class="summary-card">
+                    <h3 class="summary-title" data-i18n="shipping_summary_title">♡ your summary </h3>
+                    
+                    <div class="manifest-breakdown" id="manifest-list"></div>
+
+                    <div class="breakdown-row" style="border-top: 1px dashed var(--border-soft); padding-top: 0.8rem;">
+                        <span data-i18n="shipping_summary_base_label">base collection fee</span>
+                        <span id="summary-base-fee">0 MMK</span>
+                    </div>
+
+                    <div class="total-box">
+                        <span class="total-label" data-i18n="shipping_summary_total_label">total shipping costs:</span>
+                        <span class="total-amount" id="summary-grand-total">0 MMK</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const baseFees = { japan: 9000, thailand: 4500 };
+
+        // Catalog items fix here
+        const itemCatalog = [
+            { id: 'standees', name: 'standees', jpPrice: 2500, thPrice: 1500 },
+            { id: 'cards', name: 'cards', jpPrice: 1500, thPrice: 1000 },
+            { id: 'shikishi', name: 'shikishi', jpPrice: 3000, thPrice: 1800 },
+            { id: 'figures', name: 'figures', jpPrice: 35000, thPrice: 30000 },
+            { id: 'minifigures', name: 'mini figures', jpPrice: 1900, thPrice: 1400 },
+            { id: 'badges', name: 'pin badges', jpPrice: 1000, thPrice: 1000 },
+            { id: 'plushies10', name: 'plushies (≤10cm)', jpPrice: 5000, thPrice: 4000 },
+            { id: 'plushies20', name: 'plushies (20cm)', jpPrice: 9000, thPrice: 7000 },
+            { id: 'plushies30', name: 'plushies (30cm)', jpPrice: 15000, thPrice: 13000 },
+            { id: 'plushiesMore', name: 'plushies (>30cm)', jpPrice: 20000, thPrice: 20000 },
+            { id: 'postcards', name: 'postcards', jpPrice: 1000, thPrice: 1000 },
+            { id: 'manga', name: 'manga', jpPrice: 9000, thPrice: 8000 },
+            { id: 'cd', name: 'cd', jpPrice: 3000, thPrice: 2000 },
+            { id: 'cloth', name: 'cloth (towels)', jpPrice: 4000, thPrice: 2500 },
+            { id: 'files', name: 'files', jpPrice: 1800, thPrice: 1100 },
+            { id: 'stickers', name: 'stickers', jpPrice: 1200, thPrice: 800 },
+            { id: 'plasticDisplay', name: 'plastic display cards', jpPrice: 2200, thPrice: 1400 },
+            { id: 'acrylicItems', name: 'acrylic items', jpPrice: 2400, thPrice: 1600 },
+            { id: 'toteBags', name: 'tote bags & pouches', jpPrice: 4800, thPrice: 3200 },
+            { id: 'mochiMascots', name: 'mochi mascots / rounds', jpPrice: 2800, thPrice: 1900 },
+            { id: 'other', name: 'other / custom size', jpPrice: 0, thPrice: 0 }
+        ];
+
+        let activeCountry = 'japan';
+        let selectedItems = {}; 
+
+function applyLiveTimestamp() {
+    const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+    
+    const customDate = new Date('2026-07-06'); 
+    
+    const formattedToday = customDate.toLocaleDateString('en-US', dateOptions);
+    const prefix = window.getI18nText ? window.getI18nText('shipping_last_update') : "last update:";
+    document.getElementById('live-date-stamp').innerText = `${prefix} ${formattedToday}`;
+}
+
+        function generateGoodsGrid() {
+            const container = document.getElementById('goods-container');
+            container.innerHTML = '';
+
+            itemCatalog.forEach(item => {
+                const price = activeCountry === 'japan' ? item.jpPrice : item.thPrice;
+                const isSelected = selectedItems[item.id] !== undefined;
+                const currentQty = isSelected ? selectedItems[item.id] : 1;
+                
+                // Fetch localized dynamic name if mapping key exists
+                let translatedItemName = item.name;
+                if (window.getI18nText) {
+                    translatedItemName = window.getI18nText(`catalog_item_${item.id}`) || item.name;
+                }
+
+                const card = document.createElement('div');
+                card.className = `goods-card ${isSelected ? 'selected' : ''}`;
+                card.id = `card-${item.id}`;
+
+                let costString = price === 0 ? 'pending quote' : '+' + price.toLocaleString() + ' mmk each';
+                if (window.getI18nText && price === 0) {
+                    costString = window.getI18nText('catalog_pending_quote') || 'pending quote';
+                } else if (window.getI18nText) {
+                    costString = `+${price.toLocaleString()} ${window.getI18nText('catalog_mmk_each') || 'mmk each'}`;
+                }
+
+                card.innerHTML = `
+                    <div class="goods-clickable-wrapper" onclick="toggleItemSelect('${item.id}')">
+                        <div class="radio-circle"></div>
+                        <div class="goods-info-block">
+                            <span class="goods-name">${translatedItemName}</span>
+                            <span class="goods-price-tag">${costString}</span>
+                        </div>
+                    </div>
+                    <div class="quantity-widget">
+                        <button type="button" class="qty-action-btn" onclick="adjustQty('${item.id}', -1)">-</button>
+                        <span class="qty-current-value" id="qty-display-${item.id}">${currentQty}</span>
+                        <button type="button" class="qty-action-btn" onclick="adjustQty('${item.id}', 1)">+</button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function setCountry(country) {
+            activeCountry = country;
+            document.getElementById('btn-japan').classList.toggle('active', country === 'japan');
+            document.getElementById('btn-thailand').classList.toggle('active', country === 'thailand');
+            generateGoodsGrid();
+            calculateGrandTotal();
+        }
+
+        function toggleItemSelect(id) {
+            const card = document.getElementById(`card-${id}`);
+            if (selectedItems[id] !== undefined) {
+                delete selectedItems[id];
+                card.classList.remove('selected');
+            } else {
+                selectedItems[id] = 1;
+                card.classList.add('selected');
+                document.getElementById(`qty-display-${id}`).innerText = '1';
+            }
+            calculateGrandTotal();
+        }
+
+        function adjustQty(id, change) {
+            if (selectedItems[id] === undefined) return;
+            let targetNewQty = selectedItems[id] + change;
+            
+            if (targetNewQty < 1) {
+                delete selectedItems[id];
+                document.getElementById(`card-${id}`).classList.remove('selected');
+            } else {
+                selectedItems[id] = targetNewQty;
+                document.getElementById(`qty-display-${id}`).innerText = targetNewQty;
+            }
+            calculateGrandTotal();
+        }
+
+        function clearAllSelections() {
+            selectedItems = {};
+            const cards = document.querySelectorAll('.goods-card');
+            cards.forEach(card => card.classList.remove('selected'));
+            calculateGrandTotal();
+        }
+
+        function calculateGrandTotal() {
+            let runningSum = baseFees[activeCountry];
+            const manifestList = document.getElementById('manifest-list');
+            const baseFeeDisplay = document.getElementById('summary-base-fee');
+            const totalDisplay = document.getElementById('summary-grand-total');
+
+            manifestList.innerHTML = '';
+            baseFeeDisplay.innerText = `${baseFees[activeCountry].toLocaleString()} MMK`;
+
+            Object.keys(selectedItems).forEach(itemId => {
+                const itemMeta = itemCatalog.find(i => i.id === itemId);
+                const itemPrice = activeCountry === 'japan' ? itemMeta.jpPrice : itemMeta.thPrice;
+                const quantity = selectedItems[itemId];
+                const itemTotalCost = itemPrice * quantity;
+
+                runningSum += itemTotalCost;
+
+                let itemNameTrans = itemMeta.name;
+                if (window.getI18nText) {
+                    itemNameTrans = window.getI18nText(`catalog_item_${itemMeta.id}`) || itemMeta.name;
+                }
+
+                let displayCost = itemPrice === 0 ? 'Pending Quote' : '+' + itemTotalCost.toLocaleString() + ' MMK';
+                if (window.getI18nText && itemPrice === 0) {
+                    displayCost = window.getI18nText('catalog_pending_quote') || 'Pending Quote';
+                }
+
+                const breakdownRow = document.createElement('div');
+                breakdownRow.className = 'breakdown-row';
+                breakdownRow.innerHTML = `
+                    <span>${itemNameTrans} (x${quantity})</span>
+                    <span>${displayCost}</span>
+                `;
+                manifestList.appendChild(breakdownRow);
+            });
+
+            totalDisplay.innerText = `${runningSum.toLocaleString()} MMK`;
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            applyLiveTimestamp();
+            generateGoodsGrid();
+            calculateGrandTotal();
+            
+            // Listen to dynamic updates if language switch changes active choices mid-session
+            document.addEventListener('languageChanged', () => {
+                applyLiveTimestamp();
+                generateGoodsGrid();
+                calculateGrandTotal();
+            });
+        });
+    </script>
+</body>
+</html>

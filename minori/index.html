@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n-title="page_title_about"> MINORIN </title>
+    
+    <!-- External Stylesheets & Global Scripts -->
+    <link rel="stylesheet" href="/style.css">
+    <script src="/lang-switch.js"></script>
+    <script src="/site-header.js"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baskervville:ital,wght@0,400;1,400&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            background-color: var(--bg-porcelain);
+            overflow-x: hidden;
+        }
+
+        .shrine-intro {
+            text-align: center;
+            max-width: 600px;
+            margin: 4rem auto 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .shrine-intro h1 {
+            font-size: 3rem;
+            color: var(--type-dusty-mauve);
+            margin-bottom: 0.5rem;
+        }
+
+        .shrine-intro .subtitle {
+            font-family: 'Baskervville', cursive;
+            font-size: 1rem !important;
+            color: var(--accent-antique-rose) !important;
+        }
+
+        .shrine-canvas {
+            position: relative;
+            max-width: 1100px;
+            min-height: 85vh;
+            margin: 0 auto 4rem auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 2rem;
+        }
+
+        .central-coaster {
+            width: 280px;
+            height: 280px;
+            background-color: var(--bg-vintage-lace);
+            border: 4px dashed var(--type-dusty-mauve);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            z-index: 10;
+            box-shadow: 0 12px 30px rgba(92, 75, 73, 0.1), 0 0 0 8px var(--bg-porcelain);
+            position: relative;
+            transition: transform 0.4s ease;
+        }
+
+        .central-coaster:hover {
+            transform: scale(1.03) rotate(2deg);
+        }
+
+        .central-coaster h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--type-dusty-mauve);
+            margin-bottom: 0.5rem;
+        }
+
+        .central-coaster p {
+            font-family: 'Baskervville', serif;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            color: var(--type-dusty-mauve);
+            font-style: italic;
+        }
+
+        .central-coaster .clover-deco {
+            font-size: 1.2rem;
+            color: var(--accent-tea-rose);
+            margin-top: 0.5rem;
+        }
+
+        .pic-placeholder {
+            position: absolute;
+            background: var(--bg-porcelain);
+            padding: 0.8rem 0.8rem 2.2rem 0.8rem;
+            border: 1px solid var(--tone-oat-silk);
+            box-shadow: 4px 8px 20px rgba(92, 75, 73, 0.08);
+            z-index: 5;
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+            width: 160px;
+            box-sizing: border-box;
+        }
+
+        .pic-placeholder .image-space {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background-color: var(--bg-vintage-lace);
+            border: 1px inset rgba(92, 75, 73, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .pic-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            font-family: 'Baskervville', serif;
+            font-size: 0.7rem;
+            font-style: italic;
+            color: var(--type-dusty-mauve);
+            text-align: center;
+            padding: 0 5px;
+        }
+
+        .pic-placeholder .caption {
+            font-family: 'Pinyon Script', cursive;
+            font-size: 1.3rem;
+            text-align: center;
+            margin-top: 0.6rem;
+            color: var(--type-dusty-mauve);
+            display: block;
+        }
+
+        .pic-placeholder:hover {
+            transform: scale(1.1) rotate(0deg) !important;
+            z-index: 20;
+            box-shadow: 0 15px 30px rgba(92, 75, 73, 0.15);
+            border-color: var(--accent-antique-rose);
+        }
+
+        .pos-top-left     { top: 5%;  left: 15%; transform: rotate(-8deg);  width: 170px; }
+        .pos-top-mid      { top: 2%;  left: 42%; transform: rotate(4deg);   width: 150px; }
+        .pos-top-right    { top: 8%;  right: 14%; transform: rotate(12deg);  width: 180px; }
+        .pos-mid-left     { top: 38%; left: 8%;   transform: rotate(6deg);   width: 160px; }
+        .pos-mid-right    { top: 35%; right: 6%;  transform: rotate(-10deg); width: 170px; }
+        .pos-bottom-left  { bottom: 6%; left: 12%; transform: rotate(-12deg); width: 180px; }
+        .pos-bottom-mid   { bottom: 2%; left: 45%; transform: rotate(-3deg);  width: 150px; }
+        .pos-bottom-right { bottom: 8%; right: 16%; transform: rotate(7deg);   width: 165px; }
+
+        .shrine-sticker {
+            position: absolute;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.8rem;
+            font-style: italic;
+            background: var(--bg-powder-blush);
+            color: var(--type-dusty-mauve);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            border: 1px dashed var(--type-dusty-mauve);
+            box-shadow: 2px 2px 0px var(--tone-oat-silk);
+            z-index: 8;
+            pointer-events: none;
+        }
+
+        .st-1 { top: 28%; left: 28%; transform: rotate(15deg); }
+        .st-2 { top: 24%; right: 28%; transform: rotate(-12deg); }
+        .st-3 { bottom: 30%; left: 26%; transform: rotate(-5deg); }
+        .st-4 { bottom: 26%; right: 25%; transform: rotate(8deg); }
+
+        .editorial-wrapper { 
+            max-width: 650px; 
+            margin: 4rem auto; 
+            padding: 0 1.5rem; 
+        }
+        
+        .page-title { 
+            font-size: 1.1rem; 
+            font-weight: 400; 
+            color: var(--text-sepia); 
+            text-align: center; 
+            margin-bottom: 2.5rem; 
+        }
+        
+        .story-block { 
+            margin-bottom: 2.5rem; 
+        }
+        
+        .story-heading { 
+            font-size: 0.95rem; 
+            font-weight: 400; 
+            color: var(--accent-rose); 
+            margin-bottom: 1rem; 
+            border-bottom: 1px dashed var(--border-thin); 
+            padding-bottom: 0.4rem; 
+            text-transform: lowercase; 
+        }
+        
+        .story-text { 
+            font-size: 0.82rem; 
+            line-height: 1.8; 
+            margin-bottom: 1rem; 
+            color: var(--text-sepia); 
+        }
+        
+        .video-container { 
+            position: relative; 
+            padding-bottom: 56.25%; 
+            height: 0; 
+            overflow: hidden; 
+            max-width: 100%; 
+            border-radius: 6px; 
+            margin: 2rem auto; 
+        }
+        
+        .video-container iframe { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            border: 0; 
+        }
+        
+        .luxury-country-links { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 0.75rem; 
+        }
+        
+        .country-row-item { 
+            display: flex; 
+            flex-direction: column; 
+            text-decoration: none; 
+            background: #fffff0; 
+            border: 2px dotted var(--text-espresso); 
+            padding: 1rem 1.2rem; 
+            border-radius: 2px; 
+            transition: all 0.2s ease; 
+        }
+        
+        .country-row-name { 
+            font-size: 0.88rem; 
+            color: var(--accent-rose); 
+            margin-bottom: 0.2rem; 
+        }
+        
+        .country-row-desc { 
+            font-size: 0.78rem; 
+            color: var(--text-sepia); 
+            opacity: 0.7; 
+            font-style: italic; 
+        }
+
+        .scallop-divider {
+            text-align: center;
+            color: var(--accent-antique-rose);
+            margin: 5rem auto;
+            font-size: 1.5rem;
+            letter-spacing: 0.5rem;
+            opacity: 0.5;
+        }
+
+        #shrine-gate {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-porcelain);
+            z-index: 999999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.8s;
+        }
+
+        #shrine-gate.fade-away {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .gate-coaster {
+            width: 300px;
+            height: 300px;
+            background-color: var(--bg-vintage-lace);
+            border: 4px dashed var(--type-dusty-mauve);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            box-shadow: 0 15px 35px rgba(92, 75, 73, 0.12), 0 0 0 12px var(--bg-porcelain);
+        }
+
+        .gate-coaster h2 {
+            font-family: 'Pinyon Script', cursive;
+            font-size: 3rem !important;
+            color: var(--accent-antique-rose);
+            margin-bottom: -0.5rem;
+        }
+
+        .gate-coaster p {
+            font-family: 'Baskervville', serif;
+            font-size: 0.85rem;
+            color: var(--type-dusty-mauve);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .gate-btn {
+            background: var(--bg-porcelain);
+            border: 1px solid var(--type-dusty-mauve);
+            color: var(--type-dusty-mauve);
+            padding: 0.6rem 1.5rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            cursor: pointer;
+            border-radius: 20px;
+            box-shadow: 2px 2px 0px var(--type-dusty-mauve);
+            transition: all 0.2s ease;
+        }
+
+        .gate-btn:hover {
+            background: var(--type-dusty-mauve);
+            color: var(--bg-porcelain);
+            transform: scale(1.05);
+        }
+
+        .music-control-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: var(--bg-vintage-lace);
+            border: 1px dashed var(--type-dusty-mauve);
+            color: var(--type-dusty-mauve);
+            padding: 0.5rem 1.2rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.75rem;
+            font-style: italic;
+            text-transform: lowercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            border-radius: 20px;
+            box-shadow: 3px 3px 0px var(--tone-oat-silk);
+            z-index: 99999;
+            display: none;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all 0.2s ease;
+        }
+
+        .music-control-btn:hover {
+            background: var(--bg-powder-blush);
+            transform: scale(1.05);
+        }
+
+        .magic-particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 99999;
+            font-size: 1.5rem;
+            user-select: none;
+            animation: fallAndSpin 3.5s linear forwards;
+        }
+
+        @keyframes fallAndSpin {
+            0% {
+                transform: translateY(-50px) rotate(0deg);
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(105vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .shrine-canvas {
+                display: block;
+                position: relative;
+                width: 100%;
+                min-height: 520px; 
+                margin: 0 auto;
+                padding: 0;
+            }
+
+            .central-coaster {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 145px;
+                height: 145px;
+                padding: 0.6rem;
+                box-shadow: 0 8px 20px rgba(92, 75, 73, 0.1), 0 0 0 4px var(--bg-porcelain);
+            }
+
+            .central-coaster:hover {
+                transform: translate(-50%, -50%) scale(1.03) rotate(2deg);
+            }
+
+            .central-coaster h2 {
+                font-size: 0.95rem;
+                margin-bottom: 0.2rem;
+            }
+
+            .central-coaster p {
+                font-size: 0.5rem;
+                line-height: 1.3;
+            }
+
+            .central-coaster .clover-deco {
+                font-size: 0.7rem;
+                margin-top: 0.2rem;
+            }
+
+            .pic-placeholder {
+                position: absolute !important;
+                padding: 0.3rem 0.3rem 1.1rem 0.3rem;
+                box-shadow: 2px 4px 10px rgba(92, 75, 73, 0.08);
+            }
+
+            .pic-placeholder .caption {
+                font-size: 0.75rem;
+                margin-top: 0.3rem;
+            }
+
+            .pos-top-left     { top: 4%;   left: 3%;   width: 85px !important;  transform: rotate(-8deg); }
+            .pos-top-mid      { top: 1%;   left: 38%;  width: 80px !important;  transform: rotate(4deg); }
+            .pos-top-right    { top: 6%;   right: 3%;  width: 90px !important;  transform: rotate(12deg); }
+            .pos-mid-left     { top: 38%;  left: 1%;   width: 80px !important;  transform: rotate(6deg); }
+            .pos-mid-right    { top: 35%;  right: 1%;  width: 85px !important;  transform: rotate(-10deg); }
+            .pos-bottom-left  { bottom: 4%; left: 3%;   width: 90px !important;  transform: rotate(-12deg); }
+            .pos-bottom-mid   { bottom: 1%; left: 38%;  width: 80px !important;  transform: rotate(-3deg); }
+            .pos-bottom-right { bottom: 6%; right: 3%;  width: 85px !important;  transform: rotate(7deg); }
+
+            .shrine-sticker {
+                display: block !important;
+                font-size: 0.48rem;
+                padding: 0.15rem 0.4rem;
+                border-radius: 12px;
+                box-shadow: 1px 1px 0px var(--tone-oat-silk);
+            }
+
+            .st-1 { top: 30%; left: 21%; transform: rotate(15deg); }
+            .st-2 { top: 25%; right: 21%; transform: rotate(-12deg); }
+            .st-3 { bottom: 31%; left: 16%; transform: rotate(-5deg); }
+            .st-4 { bottom: 27%; right: 16%; transform: rotate(8deg); }
+
+            .music-control-btn {
+                bottom: 1.5rem;
+                right: 1.5rem;
+                padding: 0.4rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="shrine-bgm" src="/minori.mp3" loop></audio>
+
+    <button id="music-toggle" class="music-control-btn" onclick="toggleMusic()">
+        <span>🎵 pause music</span>
+    </button>
+
+    <div id="shrine-gate">
+        <div class="gate-coaster">
+            <h2> you found our secret!!
+            <button class="gate-btn" onclick="igniteShrineMagic()"> more mooore jump ! ☘️</button>
+        </div>
+    </div>
+
+    <header id="global-header" class="site-header fade-up"></header>
+
+    <div class="main-container">
+        
+        <section class="shrine-intro fade-up delay-1">
+            <h1>Let's do our very, very, veeeery best!</h1>
+            <p class="subtitle">screenshot this page and send it under the comment section of our telegram annoucement post to claim 10% off your order!</p>
+        </section>
+
+        <section class="shrine-canvas fade-up delay-2">
+          
+            <div class="central-coaster">
+                <h2>Hanasato Minori</h2>
+                <p>"Even if my dreams seem far away, I will keep reaching out until I catch them with you!"</p>
+                <div class="clover-deco">‧₊ ᵎᵎ 🍀 ໒꒱</div>
+            </div>
+
+            <!-- Polaroid Photo Matrix Positions -->
+            <div class="pic-placeholder pos-top-left">
+                <div class="image-space"><img src="/one.gif" alt="Minori Card Illustration 1"></div>
+                <span class="caption"> </span>
+            </div>
+
+            <div class="pic-placeholder pos-top-mid">
+                <div class="image-space"><img src="/two.gif" alt="Minori Cute Moment"></div>
+                <span class="caption">motto motto!</span>
+            </div>
+
+            <div class="pic-placeholder pos-top-right">
+                <div class="image-space"><img src="/three.jpg" alt="Minori Card Illustration 2"></div>
+                <span class="caption"> </span>
+            </div>
+
+            <div class="pic-placeholder pos-mid-left">
+                <div class="image-space"><img src="/four.jpg"  alt="Minori Live 3D MV"></div
+                <span class="caption"> cute cute !</span>
+            </div>
+
+            <div class="pic-placeholder pos-mid-right">
+                <div class="image-space"><img src="/eight.jpg" alt="Minori Casual Outfit"></div>
+                <span class="caption">daily peace</span>
+            </div>
+
+            <div class="pic-placeholder pos-bottom-left">
+                <div class="image-space"><img src="/six.gif" alt="Minori Rooftop Practice"></div>
+                <span class="caption">never give up</span>
+            </div>
+
+            <div class="pic-placeholder pos-bottom-mid">
+                <div class="image-space"><img src="/seven.gif" alt="Minori Chat Stamp"></div>
+                <span class="caption">ganbare!</span>
+            </div>
+
+            <div class="pic-placeholder pos-bottom-right">
+                <div class="image-space"><img src="/five.gif" alt="Minori ColorFes Layout"></div>
+                <span class="caption">miracle light</span>
+            </div>
+
+            
+        </section>
+        
+    </div>
+
+    
+    
+       <footer class="site-footer fade-up delay-2">
+        <p data-i18n="global_footer_info">allnightthinkingofyou@gmail.com ❤︎⁠ located in yangon, myanmar</p>
+    </footer>
+
+       
+    <script>
+        function igniteShrineMagic() {
+            const gate = document.getElementById('shrine-gate');
+            gate.classList.add('fade-away');
+
+            const audio = document.getElementById('shrine-bgm');
+            audio.play().then(() => {
+                console.log("Audio started successfully!");
+                document.getElementById('music-toggle').style.display = 'flex';
+            }).catch(error => {
+                console.error("Playback error detail:", error);
+                alert("Audio failed! 🛑 System error code: " + error.message + "\n\nMake sure 'minori.mp3' is placed inside the root folder of your project workspace.");
+            });
+
+            spawnParticleStorm(60); 
+        }
+
+        function toggleMusic() {
+            const audio = document.getElementById('shrine-bgm');
+            const toggleBtn = document.getElementById('music-toggle');
+            
+            if (audio.paused) {
+                audio.play();
+                toggleBtn.innerHTML = '<span>🎵 pause music</span>';
+            } else {
+                audio.pause();
+                toggleBtn.innerHTML = '<span>🤫 play music</span>';
+            }
+        }
+
+        function spawnParticleStorm(count) {
+            const confettiColors = ['#F6C7CF', '#F7D8CC', '#EADFD6', '#FAF6F1'];
+            const shapes = ['☘️', '🍀', 'dot', 'square'];
+
+            for (let i = 0; i < count; i++) {
+                setTimeout(() => {
+                    const particle = document.createElement('div');
+                    particle.classList.add('magic-particle');
+                    
+                    const randomShape = shapes[Math.floor(Math.random() * shapes.length)];
+                    
+                    if (randomShape === '☘️' || randomShape === '🍀') {
+                        particle.innerText = randomShape;
+                    } else {
+                        particle.style.width = Math.random() * 8 + 6 + 'px';
+                        particle.style.height = Math.random() * 8 + 6 + 'px';
+                        particle.style.backgroundColor = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+                        if (randomShape === 'dot') {
+                            particle.style.borderRadius = '50%';
+                        }
+                    }
+
+                    particle.style.left = Math.random() * 100 + 'vw';
+                    particle.style.top = '-20px';
+                    
+                    const scale = Math.random() * 0.6 + 0.7;
+                    particle.style.transform = `scale(${scale})`;
+                    particle.style.animationDuration = Math.random() * 2 + 2.5 + 's';
+                    particle.style.animationDelay = Math.random() * 0.4 + 's';
+
+                    document.body.appendChild(particle);
+
+                    setTimeout(() => {
+                        particle.remove();
+                    }, 4000);
+                }, i * 40);
+            }
+        }
+    </script>
+
+</body>
+</html>

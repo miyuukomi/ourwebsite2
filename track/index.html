@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n-title="page_title_track">♡ track order</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baskervville:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    
+    <script src="/lang-switch.js"></script>
+    <script src="/site-header.js"></script>
+    <link rel="stylesheet" href="/style.css">
+    
+    <style>
+        .track-hero {
+            text-align: center;
+            max-width: 650px;
+            margin: 5.5rem auto 3.5rem auto;
+            padding: 0 2rem;
+        }
+
+        .track-hero h1 {
+            font-size: 2rem; 
+            font-weight: 400;
+            line-height: 1.3;
+            margin-bottom: 0.6rem;
+            color: var(--text-sepia); 
+            text-transform: lowercase;
+            font-style: italic;
+            letter-spacing: 0.02em;
+        }
+
+        .track-hero p {
+            font-style: italic;
+            font-size: 0.9rem; 
+            color: var(--text-light-sepia);
+            opacity: 0.85;
+        }
+
+        /* Razor-sharp, unshadowed entry layout matching the clean panels in download_2.jpg */
+        .luxury-search-input-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #ffffff;
+            border: 1px solid var(--border-soft);
+            border-radius: 0px;
+            max-width: 450px; 
+            margin: 0 auto;
+            padding: 0.6rem 1.4rem;
+            box-shadow: none;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .luxury-search-input-wrapper:focus-within {
+            border-color: var(--accent-rose);
+            outline: 1px dashed rgba(184, 115, 120, 0.3);
+            outline-offset: -4px;
+        }
+
+        .luxury-input {
+            flex: 1;
+            background: transparent !important;
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+            font-size: 1rem; 
+            font-family: 'Baskervville', serif;
+            color: var(--text-sepia);
+            padding: 0.3rem 0;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .luxury-input::placeholder {
+            color: var(--text-light-sepia);
+            opacity: 0.5;
+            font-style: italic;
+        }
+
+        .luxury-track-btn {
+            background: none !important;
+            border: none !important;
+            outline: none !important;
+            font-family: 'Baskervville', serif;
+            font-size: 1.1rem;
+            color: var(--text-sepia);
+            cursor: pointer;
+            padding-left: 1.2rem;
+            opacity: 0.6;
+            transition: all 0.25s ease;
+        }
+
+        .luxury-track-btn:hover { 
+            color: var(--accent-rose);
+            opacity: 1; 
+        }
+
+        #tracking-output-stage {
+            max-width: 550px;
+            margin: 3.5rem auto 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .white-manifest-card {
+            background-color: #ffffff;
+            background-image: repeating-linear-gradient(90deg, transparent, transparent 14px, rgba(235, 211, 213, 0.12) 14px, rgba(235, 211, 213, 0.12) 15px);
+            border: 1px solid var(--border-soft);
+            border-radius: 0px;
+            padding: 2.5rem 2.2rem;
+            box-shadow: none;
+            position: relative;
+            animation: cardReveal 0.6s cubic-bezier(0.215, 0.610, 0.355, 1) forwards;
+        }
+
+        .white-manifest-card::after {
+            content: '';
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            right: 6px;
+            bottom: 6px;
+            border: 1px dashed rgba(184, 115, 120, 0.2);
+            pointer-events: none;
+        }
+
+        @keyframes cardReveal {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .luxury-timeline {
+            list-style: none;
+            position: relative;
+            padding-left: 0;
+            margin: 1.5rem 0 0.5rem 0;
+        }
+
+        .luxury-timeline::before {
+            content: '';
+            position: absolute;
+            left: 14px; 
+            top: 14px;
+            bottom: 14px;
+            width: 0px;
+            border-left: 1px dashed var(--border-soft);
+            background: none;
+            z-index: 1;
+        }
+
+        .timeline-node {
+            display: flex;
+            align-items: flex-start;
+            position: relative;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            transform: translateY(12px);
+            animation: nodeReveal 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        .timeline-node:last-child {
+            margin-bottom: 0;
+        }
+
+        @keyframes nodeReveal {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .node-heart-marker {
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 18px; 
+            margin-top: -2px;
+            flex-shrink: 0;
+            z-index: 2;
+            background: #ffffff;
+            border: 1px solid var(--border-soft);
+            user-select: none;
+        }
+
+        .node-heart-marker .heart-svg {
+            width: 10px; 
+            height: 10px;
+            fill: var(--text-light-sepia);
+            opacity: 0.3;
+            transition: all 0.4s ease;
+        }
+
+        .timeline-node.passed-step {
+            opacity: 0.5 !important;
+        }
+        .timeline-node.passed-step .node-heart-marker {
+            background: var(--porcelain-bg);
+            border-color: rgba(235, 211, 213, 0.6);
+        }
+
+        .timeline-node.current-step {
+            opacity: 1 !important;
+        }
+        
+        .timeline-node.current-step .node-heart-marker {
+            border-color: var(--accent-rose);
+            outline: 1px solid var(--accent-rose);
+            outline-offset: -3px;
+        }
+
+        .timeline-node.current-step .heart-svg {
+            opacity: 1;
+            fill: var(--accent-rose);
+        }
+
+        .node-content h4 {
+            font-size: 0.95rem; 
+            font-weight: 400;
+            text-transform: lowercase;
+            color: var(--text-sepia);
+            line-height: 1.4;
+        }
+        
+        .timeline-node.current-step .node-content h4 {
+            color: var(--accent-rose);
+            font-weight: 400; 
+            font-style: italic; 
+        }
+    </style>
+</head>
+<body>
+
+    <header id="global-header" class="site-header fade-up"></header>
+
+    <main class="main-container fade-up delay-1">
+        <div class="track-hero">
+            <h1 data-i18n="track_hero_title">trace your order ♡</h1>
+            <p data-i18n="track_hero_subtitle">please enter your tracking number ( ⸝⸝´ ᵕ `⸝⸝) </p>
+        </div>
+        
+        <div class="luxury-search-input-wrapper">
+            <input type="text" id="tracking-input" class="luxury-input" data-i18n-placeholder="track_input_placeholder" placeholder="e.g., love-xxx-xxx-xxxx" autocomplete="off" spellcheck="false">
+            <button class="luxury-track-btn" onclick="executeParcelLookup()">❤︎⁠</button>
+        </div>
+
+        <section id="tracking-output-stage"></section>
+    </main>
+
+    <footer class="site-footer fade-up delay-2">
+        <p data-i18n="global_footer_info">allnightthinkingofyou@gmail.com ❤︎⁠ located in yangon, myanmar</p>
+    </footer>
+
+    <script>
+        /* ----------------------------------------------------
+          DONTTOUCHDONTTOUCH
+           ---------------------------------------------------- */
+        const GIST_API_URL = 'https://api.github.com/gists/ca5d21e00e393f5d4bd1d1f2936f4305';
+
+        // 🎀 Map configuration matching translation system keys completely
+        const TRACKING_PIPELINE = [
+            { id: "placed", i18nKey: "track_step_placed", label: "order placed" },
+            { id: "purchased", i18nKey: "track_step_purchased", label: "purchased" },
+            { id: "warehouse", i18nKey: "track_step_warehouse", label: "arrived at warehouse" },
+            { id: "transit", i18nKey: "track_step_transit", label: "in transit to myanmar" },
+            { id: "yangon", i18nKey: "track_step_yangon", label: "arrived in yangon" },
+            { id: "outfordelivery", i18nKey: "track_step_outfordelivery", label: "out for delivery" },
+            { id: "delivered", i18nKey: "track_step_delivered", label: "delivered" }
+        ];
+        
+        function getSpreadsheetNote(record, stepId) {
+            const targetColumnKey = ("note" + stepId).toLowerCase();
+            for (let key in record) {
+                if (key.toLowerCase() === targetColumnKey) {
+                    return record[key] ? String(record[key]).trim() : "";
+                }
+            }
+            return "";
+        }
+
+        async function executeParcelLookup() {
+            const searchField = document.getElementById('tracking-input');
+            const outputStage = document.getElementById('tracking-output-stage');
+            const rawInput = searchField.value.trim();
+
+            if (!rawInput) {
+                const promptMsg = window.getI18nText ? window.getI18nText('track_msg_empty') : "please enter a tracking identification sequence ♡ ";
+                outputStage.innerHTML = `<p style="text-align:center; font-size:0.85rem; font-style:italic; color: var(--text-light-sepia); opacity:0.6; padding-top:2rem;">${promptMsg}</p>`;
+                return;
+            }
+
+            const waitMsg = window.getI18nText ? window.getI18nText('track_msg_wait') : "please wait ♡";
+            outputStage.innerHTML = `<p style="text-align:center; font-size:0.85rem; font-style:italic; color: var(--text-light-sepia); opacity:0.6; padding-top:2rem;">${waitMsg}</p>`;
+            const sanitizedLookupKey = rawInput.replace(/[^a-zA-Z0-9]/g, "").toLowerCase();
+
+            try {
+                const response = await fetch(GIST_API_URL + '?nocache=' + new Date().getTime());
+                if (!response.ok) {
+                    const unavailMsg = window.getI18nText ? window.getI18nText('track_msg_unavailable') : "unavailable ♡ ";
+                    throw new Error(unavailMsg);
+                }
+                
+                const gistWrapper = await response.json();
+                const remoteDatabase = JSON.parse(gistWrapper.files["orders.json"].content);
+                
+                const matchedRecord = remoteDatabase.find(record => {
+                    if (!record.trackingCode) return false;
+                    const normalizedRecordKey = String(record.trackingCode).replace(/[^a-zA-Z0-9]/g, "").toLowerCase();
+                    return normalizedRecordKey === sanitizedLookupKey;
+                });
+
+                if (!matchedRecord) {
+                    const notFoundTitle = window.getI18nText ? window.getI18nText('track_msg_not_found') : "we cannot find your tracking code ( • ᴖ • ｡) ";
+                    const notFoundSub = window.getI18nText ? window.getI18nText('track_msg_not_found_hint') : "are you sure it's correct?";
+                    outputStage.innerHTML = `
+                        <p style="text-align:center; font-size:0.9rem; font-style:italic; color: var(--text-sepia); opacity:0.8; padding-top:2rem;">
+                            ${notFoundTitle}
+                            <br><span style="font-size: 0.8rem; opacity: 0.5; font-style: normal; color: var(--text-light-sepia);">${notFoundSub}</span>
+                        </p>`;
+                    return;
+                }
+
+                const sheetStatusRaw = String(matchedRecord.status).trim().toLowerCase();
+                const pipelineLabels = TRACKING_PIPELINE.map(p => p.label);
+                let currentMilestoneIndex = pipelineLabels.indexOf(sheetStatusRaw);
+                
+                if (currentMilestoneIndex === -1 && sheetStatusRaw !== "") {
+                    if (sheetStatusRaw.includes("delivered")) currentMilestoneIndex = 6;
+                    else if (sheetStatusRaw.includes("outfordelivery") || sheetStatusRaw.includes("delivered")) currentMilestoneIndex = 5;
+                    else if (sheetStatusRaw.includes("yangon")) currentMilestoneIndex = 4;
+                    else if (sheetStatusRaw.includes("transit") || sheetStatusRaw.includes("route")) currentMilestoneIndex = 3;
+                    else if (sheetStatusRaw.includes("arrived") || sheetStatusRaw.includes("warehouse")) currentMilestoneIndex = 2;
+                    else if (sheetStatusRaw.includes("purchased") || sheetStatusRaw.includes("bought")) currentMilestoneIndex = 1;
+                    else if (sheetStatusRaw.includes("placed") || sheetStatusRaw.includes("ordered")) currentMilestoneIndex = 0;
+                    else currentMilestoneIndex = 0; 
+                }
+
+                let structuralTimelineMarkup = `<ul class="luxury-timeline">`;
+                
+                TRACKING_PIPELINE.forEach((step, stepIdx) => {
+                    let contextualStateClass = "timeline-node";
+
+                    if (stepIdx < currentMilestoneIndex) {
+                        contextualStateClass += " passed-step";
+                    } else if (stepIdx === currentMilestoneIndex) {
+                        contextualStateClass += " current-step";
+                    }
+
+                    let descriptiveSubtext = getSpreadsheetNote(matchedRecord, step.id);
+                    let stepDelayTime = (stepIdx * 0.12) + "s";
+                    
+                    let displayLabel = step.label;
+                    if (window.getI18nText) {
+                        displayLabel = window.getI18nText(step.i18nKey) || step.label;
+                    }
+
+                    structuralTimelineMarkup += `
+                        <li class="${contextualStateClass}" style="animation-delay: ${stepDelayTime};">
+                            <div class="node-heart-marker">
+                                <svg class="heart-svg" viewBox="0 0 24 24">
+                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                </svg>
+                            </div>
+                            <div class="node-content">
+                                <h4 data-i18n="${step.i18nKey}">${stepIdx === currentMilestoneIndex ? matchedRecord.status : displayLabel}</h4>
+                                ${descriptiveSubtext ? `<p style="font-style: italic; margin-top: 0.15rem; opacity: 0.65; font-size: 0.8rem; color: var(--text-light-sepia);">${descriptiveSubtext}</p>` : ''}
+                            </div>
+                        </li>
+                    `;
+                });
+                
+                structuralTimelineMarkup += `</ul>`;
+
+                const trackingHeaderLabel = window.getI18nText ? window.getI18nText('track_msg_code_prefix') : " your tracking code is ♡ ";
+                const trackingUpdateLabel = window.getI18nText ? window.getI18nText('track_msg_last_updated') : "last updated: ";
+                const fallbackTime = window.getI18nText ? window.getI18nText('track_msg_recently') : "recently";
+                const atLabel = window.getI18nText ? window.getI18nText('track_msg_at') : "at ";
+
+                outputStage.innerHTML = `
+                    <div class="white-manifest-card">
+                        <div class="order-meta-card" style="margin-bottom: 2rem; border-bottom: 1px solid var(--border-soft); padding-bottom: 1rem;">
+                            <h2 style="font-size: 1.25rem; font-weight: 400; color: var(--text-sepia); text-transform: lowercase; letter-spacing: -0.01em;">${trackingHeaderLabel}${matchedRecord.trackingCode}</h2>
+                            <span style="font-size:0.8rem; color: var(--text-light-sepia); opacity:0.6; font-style: italic;">${trackingUpdateLabel}${matchedRecord.lastdate || fallbackTime}${matchedRecord.lasttime ? ` ${atLabel}${matchedRecord.lasttime}` : ''}</span>
+                        </div>
+                        ${structuralTimelineMarkup}
+                    </div>
+                `;
+            } catch (err) {
+                console.error(err);
+                const netErr = window.getI18nText ? window.getI18nText('track_msg_network_error') : "network connection issue. ";
+                const netErrSub = window.getI18nText ? window.getI18nText('track_msg_network_hint') : "could not retrieve data securely.";
+                outputStage.innerHTML = `
+                    <p style="text-align:center; font-style:italic; font-size: 0.9rem; color: var(--text-sepia); opacity: 0.8; padding-top:2rem;">
+                        ${netErr} 
+                        <br><span style="font-size: 0.8rem; font-style: normal; opacity: 0.6; color: var(--text-light-sepia);">${netErrSub}</span>
+                    </p>`;
+            }
+        }
+
+        document.getElementById('tracking-input').addEventListener('keypress', function (event) {
+            if (event.key === 'Enter') {
+                executeParcelLookup();
+            }
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const URL_PARAMETERS = new URLSearchParams(window.location.search);
+            const DIRECT_TRACKING_CODE = URL_PARAMETERS.get('code') || URL_PARAMETERS.get('trackingCode');
+            
+            if (DIRECT_TRACKING_CODE) {
+                const searchField = document.getElementById('tracking-input');
+                searchField.value = DIRECT_TRACKING_CODE;
+                executeParcelLookup();
+            }
+        });
+    </script>
+</body>
+</html>

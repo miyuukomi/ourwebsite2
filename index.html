@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n-title="page_title_home">片 HOMEPAGE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baskervville:ital@0;1&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+    <style>
+
+
+        body {
+            background-color: var(--bg-porcelain);
+            overflow-x: hidden;
+            margin: 0;
+        }
+
+        .main-container {
+            max-width: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+  
+        .hero-collage-section {
+            position: relative;
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6rem 2rem;
+            text-align: center;
+            background-color: var(--bg-porcelain);
+        }
+
+        .hero-center-content {
+            max-width: 680px;
+            z-index: 10;
+            position: relative;
+        }
+
+        .hero-center-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 400;
+            line-height: 1.2;
+            color: var(--type-dusty-mauve);
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-center-content h1::before {
+            display: none !important; 
+        }
+
+        .hero-center-content .tagline {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.3rem !important;
+            color: var(--type-dusty-mauve) !important;
+            margin-bottom: 2.5rem;
+            letter-spacing: 0.02em !important;
+        }
+
+        .floating-asset {
+            position: absolute;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            filter: drop-shadow(0 8px 20px rgba(92, 75, 73, 0.12));
+            z-index: 2;
+        }
+        .floating-asset img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+
+      
+        .editorial-cta-btn {
+            display: inline-block;
+            background: transparent;
+            color: var(--type-dusty-mauve);
+            padding: 0.8rem 2.5rem;
+            text-decoration: none;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            border: 1px solid var(--type-dusty-mauve);
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            box-shadow: none;
+        }
+
+        .editorial-cta-btn:hover {
+            background: var(--type-dusty-mauve);
+            color: var(--bg-porcelain);
+            transform: translateY(-2px);
+        }
+
+        .order-hint-text {
+            font-family: 'Baskervville', serif;
+            font-size: 0.82rem;
+            margin-top: 1.2rem;
+            font-style: italic;
+            color: var(--accent-antique-rose);
+        }
+
+        .order-hint-text a {
+            color: var(--type-dusty-mauve);
+            text-decoration: none;
+            border-bottom: 1px dashed var(--type-dusty-mauve);
+        }
+
+        .postmark {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%) rotate(8deg);
+            width: 110px;
+            height: 110px;
+            color: var(--type-dusty-mauve);
+            opacity: 0.25;
+            pointer-events: none;
+        }
+
+
+        .services-ribbons-container {
+            position: relative;
+            width: 100%;
+            background-color: var(--type-dusty-mauve); 
+            padding: 0;
+            margin: 4rem 0;
+        }
+
+        .ribbon-flower-left {
+            position: absolute;
+            left: -40px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 180px;
+            z-index: 20;
+            pointer-events: none;
+        }
+        .ribbon-flower-right {
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 160px;
+            z-index: 20;
+            pointer-events: none;
+        }
+
+        .ribbon-link-wrapper {
+            text-decoration: none;
+            display: block;
+        }
+
+        .ribbon-band {
+            position: relative;
+            width: 100%;
+            padding: 2.2rem 1rem;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .ribbon-link-wrapper:not(:last-child) .ribbon-band {
+            border-bottom: none;
+        }
+
+        .ribbon-link-wrapper:hover .ribbon-band {
+            background-color: #6d5b59; 
+        }
+
+        .ribbon-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--bg-porcelain);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .ribbon-desc {
+            font-family: 'Baskervville', serif;
+            font-size: 0.85rem;
+            color: var(--accent-tea-rose);
+            font-style: italic;
+            opacity: 0.85;
+        }
+
+        .lace-divider {
+            width: 100%;
+            height: 14px;
+            background-color: var(--bg-porcelain);
+            background-image: radial-gradient(circle at 50% 14px, transparent 8px, var(--type-dusty-mauve) 8px, var(--type-dusty-mauve) 10px, transparent 10px);
+            background-size: 16px 14px;
+            position: relative;
+        }
+        .lace-divider.bottom {
+            transform: rotate(180deg);
+        }
+
+        .editorial-bio-section {
+            max-width: 980px;
+            margin: 6rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+
+        .bio-image-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            position: static !important; 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+        }
+
+
+        .youtube-embed-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            min-height: 180px;
+        }
+
+        .youtube-embed-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 2px;
+        }
+
+        .bio-text-box h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            line-height: 1.3;
+            color: var(--type-dusty-mauve);
+            margin-bottom: 1.5rem;
+        }
+
+        .bio-text-box h2 span.script-style {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        .bio-paragraph {
+            font-family: 'Baskervville', serif;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--type-dusty-mauve);
+            margin-bottom: 2rem;
+        }
+
+ 
+        .quick-highlights-line {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.8rem;
+            font-style: italic;
+            letter-spacing: 0.05em;
+            color: var(--type-dusty-mauve);
+            margin: 2rem auto;
+            max-width: 750px;
+            padding: 0.9rem 1rem;
+            border-top: 1px dashed var(--tone-oat-silk);
+            border-bottom: 1px dashed var(--tone-oat-silk);
+        }
+
+        @media (max-width: 992px) {
+            .editorial-bio-section {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                max-width: 600px;
+            }
+            .bio-image-frame {
+                margin-bottom: 2rem;
+            }
+            .floating-asset {
+                opacity: 0.3; 
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-collage-section {
+                min-height: auto;
+                padding: 4rem 1.5rem;
+            }
+            .hero-center-content h1 {
+                font-size: 2.4rem;
+            }
+
+      
+            .floating-asset {
+                display: flex !important; 
+                opacity: 0.45; 
+            }
+
+      
+     
+            .asset-picnic { 
+                display: none !important; 
+            }
+
+            .bio-image-frame {
+                grid-template-columns: 1fr 1fr !important;
+                gap: 0.75rem !important;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .bio-image-frame img,
+            .youtube-embed-wrapper {
+                aspect-ratio: 1 / 1.25 !important; 
+                min-height: auto !important;
+            }
+
+       
+            .bio-text-box h2 {
+                font-size: 1.5rem !important;
+                text-align: center;
+                line-height: 1.4;
+            }
+            .bio-paragraph {
+                font-size: 0.9rem !important;
+                text-align: center;
+            }
+            .bio-text-box span {
+                text-align: center;
+            }
+            .bio-text-box .editorial-cta-btn {
+                display: block;
+                text-align: center;
+                margin: 0 auto;
+                max-width: 180px;
+            }
+
+
+            .ribbon-band {
+                flex-direction: column;
+                gap: 0.3rem;
+                padding: 1.5rem 1rem;
+            }
+            .ribbon-title {
+                font-size: 1.2rem;
+            }
+            .ribbon-flower-left, .ribbon-flower-right {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+
+    <header id="global-header" class="site-header"></header>
+
+    <main class="main-container">
+        
+
+        <section class="hero-collage-section choices-container fade-up delay-1">
+           
+
+            <div class="hero-center-content">
+                <svg class="postmark" viewBox="0 0 200 200" aria-hidden="true">
+                    <path id="postmarkCircle" d="M 100,100 m -78,0 a 78,78 0 1,1 156,0 a 78,78 0 1,1 -156,0" fill="none"/>
+                    <text font-family="'Playfair Display', serif" font-size="10" fill="currentColor">
+                        <textPath href="#postmarkCircle" startOffset="2%">✦ YANGON, MYANMAR ✦ PAR AVION ✦ EST. PARCEL POST ✦</textPath>
+                    </text>
+                    <circle cx="100" cy="100" r="42" fill="none" stroke="currentColor" stroke-width="1"/>
+                    <circle cx="100" cy="100" r="36" fill="none" stroke="currentColor" stroke-width="0.5"/>
+                    <text x="100" y="96" text-anchor="middle" font-family="'Playfair Display', serif" font-size="9" fill="currentColor">SENT</text>
+                    <text x="100" y="109" text-anchor="middle" font-family="'Playfair Display', serif" font-size="9" fill="currentColor">W/ LOVE</text>
+                </svg>
+                
+                <h1 data-i18n="home_hero_title">all night, thinking of you.</h1>
+                <p class="tagline" data-i18n="home_tagline">bringing FUCLK world closer to you, one parcel at a time.</p>
+                
+                <div class="cta-wrapper">
+                    <a href="/order" class="editorial-cta-btn" data-i18n="home_cta">place your order now 🎀</a>
+                    <div class="order-hint-text" data-i18n="home_tutorial_hint">
+                       need help? click <a href="/tutorial">here</a> to view tutorials!
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="quick-highlights-line fade-up delay-2" data-i18n="home_highlights">
+            fast air cargo shipments • custom personalized parcel tracking • currency conversion calculator 
+        </div>
+
+        <section class="services-ribbons-container fade-up delay-2">
+            
+            <div class="lace-divider"></div>
+           
+         <a href="/track" class="ribbon-link-wrapper">
+                <div class="ribbon-band">
+                    <span class="ribbon-title" data-i18n="home_link_track_title">片 track your order</span>
+                    <span class="ribbon-desc" data-i18n="home_link_track_desc">— click bitch to check your parcel status & package details 🎀</span>
+                </div>
+            </a>
+            
+            <div class="lace-divider"></div>
+
+  
+            <a href="/shipping" class="ribbon-link-wrapper">
+                <div class="ribbon-band">
+                    <span class="ribbon-title" data-i18n="home_link_terms_title">片 SHIPPING CALCULATOR</span>
+                    <span class="ribbon-desc" data-i18n="home_link_terms_desc">— do read our shipping rules before placing an order 🎀</span>
+                </div>
+            </a>
+            
+            <div class="lace-divider"></div>
+
+     
+            <a href="/contactus" class="ribbon-link-wrapper">
+                <div class="ribbon-band">
+                    <span class="ribbon-title" data-i18n="home_link_faq_title">片 f.a.q. & guides</span>
+                    <span class="ribbon-desc" data-i18n="home_link_faq_desc">— click here if you have any questions or need help 🎀</span>
+                </div>
+            </a>
+            
+            <div class="lace-divider bottom"></div>
+        </section>
+      
+
+        <section class="editorial-bio-section fade-up delay-2">
+            
+                <div class="youtube-embed-wrapper">
+                
+           <iframe width="560" height="315" src="https://www.youtube.com/embed/sFhKP57Nk1U?si=k0WlFZwjcdyBaPLT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                          
+                    </iframe>
+                </div>
+            </div>
+ 
+            <div class="bio-text-box">
+                <h2 data-i18n="home_quote_heading">Thoughtful service for matching manifestations <br><span class="script-style">with love and elegant style</span></h2>
+                <p class="bio-paragraph" data-i18n="home_quote">
+                    "all night thinking of you named after the classic 2014 vocaloid song by TOKOTOKO, was originally conceived as personal project for just a few friends. it was created for the moments when distance feels a little too wide, and the things we want feel just a little too far out of reach.
+we wanted to create a safe, aesthetic space in myanmar where you can effortlessly get your hands on the items you've been dreaming about from japan and thailand.
+
+checkout TOKOTOKO's all night thinking of you!"
+                </p>                
+                <a href="/contactus" class="editorial-cta-btn" data-i18n="home_link_terms_title">Read Our Story</a>
+            </div>
+        </section>
+        
+    </main>
+
+    <footer class="site-footer fade-up delay-2">
+        <p data-i18n="global_footer_info">allnightthinkingofyou@gmail.com ❤︎⁠ located in yangon, myanmar</p>
+    </footer>
+
+
+    <script src="/lang-switch.js"></script>
+    <script src="/site-header.js"></script>
+</body>
+</html>

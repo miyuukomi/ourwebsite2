@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n-title="page_title_tutorial"> ♡ tutorials </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baskervville:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    
+   
+    <script src="/lang-switch.js"></script>
+    <script src="/site-header.js"></script>
+    <link rel="stylesheet" href="/style.css">
+    
+    <style>
+
+        body {
+            padding-top: 0rem;
+            margin: 0;
+            background-color: var(--bg-porcelain);
+            color: var(--type-dusty-mauve);
+            font-family: 'Baskervville', serif;
+            background-image: repeating-linear-gradient(90deg, transparent, transparent 14px, rgba(184, 115, 116, 0.04) 14px, rgba(184, 115, 116, 0.04) 15px);
+        }
+
+        #global-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .tutorial-wrapper { 
+            max-width: 680px; 
+            margin: 5.5rem auto 5rem auto; 
+            padding: 0 1.5rem; 
+        }
+
+        .page-title { 
+            font-size: 2rem; 
+            font-weight: 400; 
+            color: var(--type-dusty-mauve); 
+            text-align: center; 
+            margin-bottom: 0.6rem; 
+            letter-spacing: 0.01em; 
+            font-style: italic;
+            text-transform: lowercase;
+        }
+
+        .page-subtitle { 
+            font-style: italic; 
+            color: var(--text-light-sepia); 
+            text-align: center; 
+            margin-bottom: 3.5rem; 
+            font-size: 0.85rem; 
+            line-height: 1.6; 
+            opacity: 0.85;
+        }
+
+        .tutorial-container { 
+            display: flex; 
+            flex-direction: column; 
+            background: #ffffff;
+            border: 1px solid var(--border-soft);
+            padding: 1rem 2rem;
+            position: relative;
+        }
+
+        .tutorial-container::after {
+            content: '';
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            right: 6px;
+            bottom: 6px;
+            border: 1px dashed rgba(184, 115, 120, 0.15);
+            pointer-events: none;
+        }
+
+        .tutorial-item { 
+            border-bottom: 1px dashed rgba(235, 211, 213, 0.6); 
+        }
+        
+        .tutorial-item:last-child {
+            border-bottom: none;
+        }
+
+        .tutorial-trigger { 
+            width: 100%; 
+            background: none; 
+            border: none; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 1.4rem 0; 
+            font-family: 'Baskervville', serif; 
+            font-size: 0.95rem; 
+            color: var(--type-dusty-mauve); 
+            cursor: pointer; 
+            text-align: left; 
+            text-transform: lowercase;
+            transition: all 0.3s ease; 
+        }
+
+        .tutorial-trigger:hover { 
+            color: var(--accent-antique-rose); 
+            padding-left: 4px;
+        }
+
+        .tutorial-icon { 
+            font-size: 0.9rem; 
+            font-weight: 300; 
+            color: var(--text-light-sepia); 
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
+        }
+
+        .tutorial-content { 
+            max-height: 0; 
+            overflow: hidden; 
+            transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease; 
+            opacity: 0; 
+        }
+
+        .tutorial-content-inner { 
+            padding-bottom: 1.5rem; 
+        }
+
+        .tutorial-content p { 
+            font-size: 0.85rem; 
+            line-height: 1.6; 
+            color: var(--text-light-sepia); 
+            margin: 0 0 1.2rem 0; 
+            font-style: italic;
+        }
+
+        .video-embed-container { 
+            position: relative; 
+            width: 100%; 
+            padding-bottom: 56.25%; 
+            height: 0; 
+            overflow: hidden; 
+            border: 1px solid var(--border-soft); 
+            background: var(--bg-porcelain); 
+        }
+
+        .video-embed-container iframe { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            border: 0; 
+        }
+
+        /* Active accordion rules transformation */
+        .tutorial-item.active .tutorial-trigger {
+            color: var(--accent-antique-rose);
+            font-style: italic;
+        }
+        .tutorial-item.active .tutorial-icon { 
+            transform: rotate(45deg); 
+            color: var(--accent-antique-rose); 
+        }
+        
+        .tutorial-item.active .tutorial-content { 
+            opacity: 1; 
+        }
+    </style>
+</head>
+<body>
+
+    <header id="global-header" class="site-header"></header>
+    
+    <main class="tutorial-wrapper fade-up delay-1">
+        <h1 class="page-title" data-i18n="tutorial_title">video tutorials ⸜(｡˃ ᵕ ˂ )⸝♡</h1>
+        <p class="page-subtitle" data-i18n="tutorial_subtitle">simple video guides to walk you through ordering, tracking,<br>and browsing your favorite storefronts step by step.</p>
+        
+        <div class="tutorial-container">
+            <div class="tutorial-item">
+                <button class="tutorial-trigger" onclick="toggleTutorial(this)">
+                    <span data-i18n="tutorial_1_title">how to place an order from japan</span>
+                    <span class="tutorial-icon">+</span>
+                </button>
+                <div class="tutorial-content">
+                    <div class="tutorial-content-inner">
+                        <p data-i18n="tutorial_1_desc">a quick walkthrough on navigating the custom proxy layout, pasting your selected japanese marketplace links, and submitting your order items total safely.</p>
+                        <div class="video-embed-container"><iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="how to place order jp" allowfullscreen></iframe></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tutorial-item">
+                <button class="tutorial-trigger" onclick="toggleTutorial(this)">
+                    <span data-i18n="tutorial_2_title">how to place an order from thailand</span>
+                    <span class="tutorial-icon">+</span>
+                </button>
+                <div class="tutorial-content">
+                    <div class="tutorial-content-inner">
+                        <p data-i18n="tutorial_2_desc">learn how to use our live currency conversion calculations to coordinate item rates from custom local storefronts, private sales, and open social media listings.</p>
+                        <div class="video-embed-container"><iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="how to place order th" allowfullscreen></iframe></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tutorial-item">
+                <button class="tutorial-trigger" onclick="toggleTutorial(this)">
+                    <span data-i18n="tutorial_3_title">how to track your order</span>
+                    <span class="tutorial-icon">+</span>
+                </button>
+                <div class="tutorial-content">
+                    <div class="tutorial-content-inner">
+                        <p data-i18n="tutorial_3_desc">see how our custom integrated tracking dashboards work so you can safely watch your parcel's route from warehouse storage straight down into yangon.</p>
+                        <div class="video-embed-container"><iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="how to track order" allowfullscreen></iframe></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tutorial-item">
+                <button class="tutorial-trigger" onclick="toggleTutorial(this)">
+                    <span data-i18n="tutorial_4_title">how to calculate shipping fees</span>
+                    <span class="tutorial-icon">+</span>
+                </button>
+                <div class="tutorial-content">
+                    <div class="tutorial-content-inner">
+                        <p data-i18n="tutorial_4_desc">an instruction guide breaking down volumetric guidelines, basic target parameters, and how to verify item weights ahead of transit processing.</p>
+                        <div class="video-embed-container"><iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="how to calculate shipping fees" allowfullscreen></iframe></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tutorial-item">
+                <button class="tutorial-trigger" onclick="toggleTutorial(this)">
+                    <span data-i18n="tutorial_5_title">how to use mercari jp</span>
+                    <span class="tutorial-icon">+</span>
+                </button>
+                <div class="tutorial-content">
+                    <div class="tutorial-content-inner">
+                        <p data-i18n="tutorial_5_desc">pro tips on isolating pristine secondhand treasures on mercari, recognizing certified merchant review markers, and picking out optimum deals safely.</p>
+                        <div class="video-embed-container"><iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="how to use mercari" allowfullscreen></iframe></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tutorial-item">
+                <button class="tutorial-trigger" onclick="toggleTutorial(this)">
+                    <span data-i18n="tutorial_6_title">how to use package forwarding services</span>
+                    <span class="tutorial-icon">+</span>
+                </button>
+                <div class="tutorial-content">
+                    <div class="tutorial-content-inner">
+                        <p data-i18n="tutorial_6_desc">a comprehensive tutorial explaining how to check out independently on overseas apps using our secure address coordinates in saitama and pathumthani.</p>
+                        <div class="video-embed-container"><iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="how to use forwarding" allowfullscreen></iframe></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+      <footer class="site-footer fade-up delay-2">
+        <p data-i18n="global_footer_info">allnightthinkingofyou@gmail.com ❤︎⁠ located in yangon, myanmar</p>
+    </footer>
+
+    <script>
+        function toggleTutorial(button) {
+            const item = button.parentElement;
+            const content = button.nextElementSibling;
+            const container = item.parentElement;
+            container.querySelectorAll('.tutorial-item').forEach(el => {
+                if (el !== item && el.classList.contains('active')) {
+                    el.classList.remove('active');
+                    el.querySelector('.tutorial-content').style.maxHeight = null;
+                }
+            });
+            item.classList.toggle('active');
+            if (item.classList.contains('active')) {
+                content.style.maxHeight = content.scrollHeight + "px";
+            } else {
+                content.style.maxHeight = null;
+            }
+        }
+    </script>
+</body>
+</html>

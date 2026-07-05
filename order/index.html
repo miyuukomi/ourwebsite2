@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n-title="page_title_order">片 PLACE ORDER</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baskervville:ital@0;1&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+    <style>
+    
+        :root {
+            --ballet-pink-faint: #fff4f5;
+            --ballet-stripe: #fbeee0;
+            --crisp-white: #ffffff;
+            --frame-gold: #d5b4a9;
+            --text-dark: #4a3b39;
+            --text-muted: #8e7673;
+            
+            --pinstripe-pattern: linear-gradient(90deg, #ffffff 0px, #ffffff 6px, #fff5f6 6px, #fff5f6 12px);
+        }
+
+        body {
+            background-color: var(--bg-porcelain);
+            color: var(--text-dark);
+            font-family: 'Baskervville', serif;
+            font-size: 0.92rem;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .main-container {
+            max-width: 1100px;
+            margin: 4rem auto 6rem auto;
+            padding: 0 2rem;
+        }
+
+       
+        .order-header-section {
+            text-align: center;
+            margin-bottom: 4.5rem;
+        }
+
+        .order-header-section .princess-tiara {
+            font-family: 'Pinyon Script', cursive;
+            font-size: 3.5rem;
+            color: var(--accent-antique-rose);
+            line-height: 1;
+            margin-bottom: 0.2rem;
+            display: block;
+            font-style: italic;
+        }
+
+        .editorial-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
+            font-weight: 400;
+            color: var(--text-dark);
+            margin: 0 0 0.8rem 0;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+        }
+
+        .editorial-subtitle {
+            font-family: 'Baskervville', serif;
+            font-style: italic;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            margin: 0;
+        }
+
+    
+        .crisp-text-banner {
+            border: 1px solid var(--frame-gold);
+            padding: 0.4rem 1.5rem;
+            display: inline-block;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.78rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--text-dark);
+            background: var(--crisp-white);
+            margin: 1rem 0;
+        }
+
+        .mirror-carousel-wrapper {
+            position: relative;
+            margin: 2rem auto 5rem auto;
+            max-width: 1050px;
+            padding: 0 3rem;
+        }
+
+        .mirror-carousel-track-container {
+            overflow: hidden;
+            width: 100%;
+            padding: 1.5rem 0;
+        }
+
+        .mirror-carousel-track {
+            display: flex;
+            gap: 2rem;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            will-change: transform;
+        }
+
+        .mirror-frame-link {
+            text-decoration: none;
+            color: inherit;
+            flex: 0 0 calc(33.333% - 1.34rem);
+            box-sizing: border-box;
+            display: block;
+            outline: none;
+        }
+
+        @media (max-width: 900px) {
+            .mirror-frame-link { flex: 0 0 calc(50% - 1rem); }
+        }
+        
+        @media (max-width: 620px) {
+            .editorial-title { font-size: 1.8rem; }
+            .mirror-carousel-wrapper { padding: 0 1rem; }
+            .mirror-frame-link { flex: 0 0 100%; }
+            .carousel-arrow { width: 36px; height: 36px; }
+        }
+
+     
+        .mirror-oval {
+            background-image: var(--pinstripe-pattern);
+            border: 1px solid var(--frame-gold);
+            border-radius: 0px; 
+            width: 100%;
+            height: 390px;
+            padding: 2.5rem 1.8rem;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .mirror-oval::after {
+            content: "";
+            position: absolute;
+            top: 10px; left: 10px; right: 10px; bottom: 10px;
+            border: 1px solid rgba(213, 180, 169, 0.4);
+            pointer-events: none;
+            border-radius: 0;
+        }
+
+ 
+
+        .mirror-oval:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(92, 75, 73, 0.08);
+            border-color: var(--text-dark);
+        }
+
+        .mirror-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            color: var(--text-dark);
+            font-weight: 400;
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--frame-gold);
+            padding-bottom: 0.4rem;
+            width: 80%;
+        }
+
+        .mirror-desc {
+            font-family: 'Baskervville', serif;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            font-style: italic;
+            line-height: 1.6;
+            padding: 0 0.5rem;
+        }
+
+ 
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--crisp-white);
+            border: 1px solid var(--frame-gold);
+            width: 40px;
+            height: 40px;
+            border-radius: 0%; /* Sharp directional indicators */
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            color: var(--text-dark);
+            transition: all 0.25s ease;
+            z-index: 10;
+        }
+
+        .carousel-arrow:hover {
+            background: var(--text-dark);
+            color: var(--bg-porcelain);
+            border-color: var(--text-dark);
+        }
+
+        .carousel-arrow.left { left: 0px; }
+        .carousel-arrow.right { right: 0px; }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.6rem;
+            margin-top: 1.5rem;
+            align-items: center;
+        }
+
+        .dot-connector { color: var(--frame-gold); font-size: 0.7rem; }
+
+        .dot {
+            width: 7px;
+            height: 7px;
+            border: 1px solid var(--frame-gold);
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .dot.active { background: var(--text-dark); border-color: var(--text-dark); transform: scale(1.3); }
+
+
+        .invoice-split-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        @media (max-width: 860px) {
+            .invoice-split-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .fine-invoice-card { position: static !important; }
+        }
+
+        .white-editorial-card {
+            background: var(--crisp-white);
+            border: 1px solid var(--frame-gold);
+            padding: 2.5rem;
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        .white-editorial-card::before {
+            content: "";
+            position: absolute;
+            top: 8px; left: 8px; right: 8px; bottom: 8px;
+            border: 1px solid rgba(213, 180, 169, 0.35);
+            pointer-events: none;
+        }
+
+        .fancy-input-group {
+            background: transparent;
+            margin-bottom: 2rem;
+        }
+
+        .editorial-input-wrap label {
+            font-size: 0.8rem;
+            font-family: 'Playfair Display', serif;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-dark);
+            margin-bottom: 0.4rem;
+            display: block;
+        }
+
+        .editorial-input-wrap input[type="text"],
+        .editorial-input-wrap input[type="number"] {
+            background: transparent !important;
+            border: none !important;
+            border-bottom: 1px solid var(--frame-gold) !important;
+            border-radius: 0 !important;
+            padding: 0.6rem 0.2rem !important;
+            font-family: 'Baskervville', serif;
+            color: var(--text-dark);
+            font-size: 1rem;
+            outline: none;
+            width: 100%;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+
+        .editorial-input-wrap input:focus {
+            border-bottom-color: var(--text-dark) !important;
+        }
+
+        .editorial-input-wrap input::placeholder {
+            color: var(--text-muted);
+            font-style: italic;
+            opacity: 0.5;
+        }
+  
+        .editorial-btn {
+            background: transparent;
+            border: 1px solid var(--text-dark);
+            color: var(--text-dark);
+            padding: 1rem 2rem;
+            font-size: 0.8rem;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 0px; /* Sharp corners */
+            transition: all 0.25s ease;
+        }
+
+        .editorial-btn:hover {
+            background: var(--text-dark);
+            color: var(--bg-porcelain);
+        }
+
+        .manifest-list {
+            margin-top: 2.5rem;
+            border-top: 1px solid var(--frame-gold);
+            padding-top: 1.5rem;
+        }
+
+
+        .manifest-item-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--crisp-white);
+            border-bottom: 1px dashed var(--frame-gold);
+            padding: 1rem 0.2rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.88rem;
+            box-sizing: border-box;
+        }
+
+        .manifest-item-url {
+            font-family: 'Baskervville', serif;
+            font-style: italic;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+            overflow: hidden;
+            display: inline-block;
+            max-width: 260px;
+            -webkit-mask-image: linear-gradient(to right, #000 75%, transparent 100%);
+            mask-image: linear-gradient(to right, #000 75%, transparent 100%);
+        }
+
+        .remove-item-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.72rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: color 0.2s ease;
+        }
+
+        .remove-item-btn:hover {
+            color: var(--accent-antique-rose);
+        }
+
+
+        .fine-invoice-card {
+            background: var(--crisp-white);
+            border: 1px solid var(--frame-gold);
+            padding: 2.5rem;
+            position: sticky;
+            top: 3rem;
+            align-self: start;
+            box-sizing: border-box;
+        }
+
+        .fine-invoice-card::before {
+            content: "";
+            position: absolute;
+            top: 8px; left: 8px; right: 8px; bottom: 8px;
+            border: 1px solid rgba(213, 180, 169, 0.35);
+            pointer-events: none;
+        }
+
+        .total-highlight-box {
+            background-image: var(--pinstripe-pattern);
+            border: 1px solid var(--frame-gold);
+            padding: 1.5rem;
+            text-align: center;
+            margin: 2rem 0 1.5rem 0;
+            position: relative;
+        }
+
+        .total-highlight-box::after {
+            content: "";
+            position: absolute;
+            top: 5px; left: 5px; right: 5px; bottom: 5px;
+            border: 1px dashed rgba(213, 180, 169, 0.5);
+            pointer-events: none;
+        }
+
+        .receipt-disclaimer-box {
+            border: 1px solid rgba(213, 180, 169, 0.4);
+            padding: 0.8rem 1.2rem;
+            margin-top: 1.5rem;
+            background: #fffbfb;
+        }
+
+        .proceed-btn {
+            background: var(--text-dark);
+            color: var(--bg-porcelain);
+            padding: 1.1rem;
+            font-size: 0.82rem;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-top: 1.5rem;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+            border-radius: 0px; /* Crisp edge alignment */
+            transition: opacity 0.25s ease;
+            position: relative;
+            z-index: 5;
+        }
+
+        .proceed-btn:hover {
+            opacity: 0.9;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            cursor: pointer;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.78rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 2.5rem;
+            padding: 0 0 5px 0;
+            border-bottom: 1px solid var(--text-dark);
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .thai-layout-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 2.5rem;
+            align-items: start;
+        }
+
+        @media (max-width: 820px) {
+            .thai-layout-grid { grid-template-columns: 1fr; }
+        }
+
+        .thai-whimsical-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 550px) {
+            .thai-whimsical-list { grid-template-columns: 1fr; }
+        }
+
+        .thai-whimsical-node {
+            background: var(--crisp-white);
+            border: 1px solid var(--frame-gold);
+            padding: 2rem 1.2rem;
+            text-align: center;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        .thai-whimsical-node:hover {
+            border-color: var(--text-dark);
+            background-color: var(--ballet-pink-faint);
+            transform: translateY(-2px);
+        }
+
+        .thai-node-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+        }
+
+        .thai-node-desc {
+            font-family: 'Baskervville', serif;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-style: italic;
+            line-height: 1.5;
+        }
+
+        .hidden { display: none !important; }
+
+        .screen-animate-trigger {
+            animation: luxuryFadeUp 0.5s ease-out forwards;
+        }
+
+        @keyframes luxuryFadeUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 640px) {
+            .main-container {
+                margin: 2rem auto 4rem auto;
+                padding: 0 1.1rem;
+            }
+
+            .order-header-section {
+                margin-bottom: 2.5rem;
+            }
+
+            .editorial-title {
+                font-size: 1.5rem;
+                letter-spacing: 0.01em;
+            }
+
+            .crisp-text-banner {
+                font-size: 0.7rem;
+                letter-spacing: 0.15em;
+                padding: 0.4rem 1rem;
+            }
+
+            .mirror-carousel-wrapper {
+                padding: 0 0.5rem;
+                margin: 1.5rem auto 3rem auto;
+            }
+
+            .mirror-oval {
+                height: auto;
+                min-height: 220px;
+                padding: 1.8rem 1.2rem;
+            }
+
+            .mirror-title {
+                font-size: 1rem;
+                width: 100%;
+            }
+
+            .mirror-desc {
+                font-size: 0.78rem;
+                padding: 0;
+            }
+
+            .carousel-arrow {
+                width: 32px;
+                height: 32px;
+                font-size: 0.7rem;
+            }
+
+            .white-editorial-card,
+            .fine-invoice-card {
+                padding: 1.5rem 1.25rem;
+            }
+
+            .white-editorial-card::before,
+            .fine-invoice-card::before {
+                top: 6px; left: 6px; right: 6px; bottom: 6px;
+            }
+
+            .invoice-split-grid {
+                gap: 1.75rem;
+            }
+
+            .fine-invoice-card {
+                top: 1rem;
+            }
+
+            .manifest-item-row {
+                flex-wrap: wrap;
+                row-gap: 0.5rem;
+                padding: 0.9rem 0;
+            }
+
+            .manifest-item-row > div {
+                max-width: 100% !important;
+            }
+
+            .manifest-item-url {
+                max-width: 100%;
+                width: 100%;
+            }
+
+            .remove-item-btn {
+                align-self: flex-end;
+            }
+
+            .total-highlight-box {
+                padding: 1.1rem;
+            }
+
+            .thai-whimsical-node {
+                padding: 1.5rem 1rem;
+            }
+
+            .back-btn {
+                margin-bottom: 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="global-header" class="site-header"></header>
+
+    <main class="main-container">
+        
+        
+        <div id="step-1-screen" class="screen-animate-trigger">
+            <div class="order-header-section">
+                <h1 class="editorial-title" data-i18n="order_main_title">place your order</h1>
+                <div class="crisp-text-banner" data-i18n="order_main_subtitle">place your order</div>
+            </div>
+
+            <div class="mirror-carousel-wrapper">
+                <button class="carousel-arrow left" onclick="moveCarousel(-1)" aria-label="Previous">❮</button>
+                <button class="carousel-arrow right" onclick="moveCarousel(1)" aria-label="Next">❯</button>
+                
+                <div class="mirror-carousel-track-container" id="carouselContainer">
+                    <div class="mirror-carousel-track" id="carouselTrack">
+                        
+                        <div class="mirror-frame-link" onclick="selectCountry('japan')">
+                            <div class="mirror-oval">
+                                <span class="mirror-title" data-i18n="order_country_jp_title">Buy From Japan</span>
+                                <span class="mirror-desc" data-i18n="order_country_jp_desc">direct boutique proxy routing across mercari, rakuten, surugaya, and more.</span>
+                            </div>
+                        </div>
+
+                        <div class="mirror-frame-link" onclick="selectCountry('thailand')">
+                            <div class="mirror-oval">
+                                <span class="mirror-title" data-i18n="order_country_th_title">Buy From Thailand</span>
+                                <span class="mirror-desc" data-i18n="order_country_th_desc">specialized shopping pipelines for shopee, aliexpress, facebook, and private channels.</span>
+                            </div>
+                        </div>
+
+                        <a href="/shipping" class="mirror-frame-link">
+                            <div class="mirror-oval">
+                                <span class="mirror-title" data-i18n="order_rule_calc_title">Air Freight Calc</span>
+                                <span class="mirror-desc" data-i18n="order_rule_calc_desc">estimate your baseline target weight values before formatting checkout.</span>
+                            </div>
+                        </a>
+
+                        <a href="/terms" class="mirror-frame-link">
+                            <div class="mirror-oval">
+                                <span class="mirror-title" data-i18n="order_rule_terms_title">Terms Matrix</span>
+                                <span class="mirror-desc" data-i18n="order_rule_terms_desc">prohibited parameters, local legal declarations, and safety parameters.</span>
+                            </div>
+                        </a>
+
+                        <a href="/refund" class="mirror-frame-link">
+                            <div class="mirror-oval">
+                                <span class="mirror-title" data-i18n="order_rule_refund_title">Loss Coverage</span>
+                                <span class="mirror-desc" data-i18n="order_rule_refund_desc">eligibility constraints and loss recovery guarantees.</span>
+                            </div>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div class="carousel-dots" id="carouselDots">
+                    <div class="dot active" onclick="jumpToSlide(0)"></div>
+                    <span class="dot-connector">·</span>
+                    <div class="dot" onclick="jumpToSlide(1)"></div>
+                    <span class="dot-connector">·</span>
+                    <div class="dot" onclick="jumpToSlide(2)"></div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="step-2-screen" class="hidden">
+            <button class="back-btn" onclick="goBackToCountries()" data-i18n="order_back_action">← Back to Selections</button>
+            <h2 id="current-country-title" class="editorial-title" style="text-align: left; font-size: 1.5rem; margin-bottom: 0.2rem; letter-spacing: 0.05em;">Shopping Hub</h2>
+            <p id="step-2-subtitle" style="font-style: italic; font-size: 0.85rem; margin-bottom: 3rem; color: var(--text-muted);"></p>
+
+            <div id="form-japan" class="country-form hidden invoice-split-grid">
+                <div class="form-entry-side white-editorial-card">
+                    <h3 style="font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 400; margin-bottom: 2rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-dark);" data-i18n="order_jp_form_title">Register Item Manifest</h3>
+                    
+                    <div class="fancy-input-group">
+                        <div class="editorial-input-wrap">
+                            <label for="jp-item-link" data-i18n="order_jp_link_label">Item Coordinate Link</label>
+                            <input type="text" id="jp-item-link" placeholder="paste item url link here...">
+                        </div>
+                    </div>
+                    
+                    <div class="fancy-input-group">
+                        <div class="editorial-input-wrap">
+                            <label for="jp-item-price" data-i18n="order_jp_price_label">Valuation Pricing (Yen)</label>
+                            <input type="number" id="jp-item-price" placeholder="amount in yen...">
+                        </div>
+                    </div>
+
+                    <button type="button" class="editorial-btn" style="margin-top: 0.5rem;" onclick="addItemToManifest('japan')" data-i18n="order_jp_add_action">Add To Ledger List</button>
+                    
+                    <div id="jp-cart-items-container" class="manifest-list"></div>
+                </div>
+
+                <div class="fine-invoice-card">
+                    <h3 style="font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 400; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-dark); border-bottom: 1px solid var(--frame-gold); padding-bottom: 0.6rem;" data-i18n="order_jp_calc_title">Valuation Statement</h3>
+                    
+                    <div class="invoice-row" style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.8rem; color: var(--text-muted);">
+                        <span data-i18n="order_calc_count">Registered Count</span>
+                        <span id="jp-summary-count" style="font-family: 'Playfair Display', serif; color: var(--text-dark);">0</span>
+                    </div>
+                    
+                    <div class="invoice-row" style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.8rem; color: var(--text-muted);">
+                        <span data-i18n="order_calc_subtotal">Base Currency Subtotal</span>
+                        <span id="jp-summary-foreign" style="font-family: 'Playfair Display', serif; color: var(--text-dark);">¥0</span>
+                    </div>
+                    
+                    <div class="total-highlight-box">
+                        <span class="total-label" style="font-family: 'Playfair Display', serif; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted);" data-i18n="order_calc_total">Estimated Grand Total</span>
+                        <span id="jp-summary-mmk" class="total-amount" style="font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--text-dark); display: block; margin-top: 0.4rem; letter-spacing: 0.02em;">0 MMK</span>
+                    </div>
+
+                    <div class="receipt-disclaimer-box">
+                         <h3 style="font-size: 0.72rem; font-weight: 400; line-height: 1.6; margin: 0; color: var(--text-muted); font-style: bold; text-align: center;" data-i18n="order_calc_disclaimer">
+                             * International freight margins calculated upon arrival. Prohibited volume configurations apply.
+                         </h3>
+                    </div>
+
+                    
+
+                    <div class="receipt-disclaimer-box">
+                         <h3 style="font-size: 0.72rem; font-weight: 400; line-height: 1.6; margin: 0; color: var(--text-muted); font-style: bold; text-align: center;" data-i18n="order_calc_disclaimer2">
+                             * International freight margins calculated upon arrival. Prohibited volume configurations apply.
+                         </h3>
+                    </div>
+
+                    <button type="button" class="proceed-btn" onclick="proceedToCheckoutPage()" data-i18n="order_checkout_action">Secure Order Checkout</button>
+                </div>
+            </div>
+
+            <div id="form-thailand" class="country-form hidden thai-layout-grid">
+                <div class="white-editorial-card">
+                    <h3 style="font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 400; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-dark); border-bottom: 1px solid var(--frame-gold); padding-bottom: 0.5rem;" data-i18n="order_th_calc_title">Baht Exchange Matrix</h3>
+                    
+                    <div class="fancy-input-group">
+                        <div class="editorial-input-wrap">
+                            <label for="th-calc-price" data-i18n="order_th_input_label">Volume Value (Baht)</label>
+                            <input type="number" id="th-calc-price" placeholder="amount in baht..." oninput="calculateThailandLive()">
+                        </div>
+                    </div>
+
+                    <div class="invoice-row" style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.8rem; color: var(--text-muted);">
+                        <span data-i18n="order_calc_subtotal">Exchange Subtotal</span>
+                        <span id="th-res-cost" style="font-family: 'Playfair Display', serif; color: var(--text-dark);">0 MMK</span>
+                    </div>
+                    <div class="invoice-row" style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.8rem; color: var(--text-muted);">
+                        <span data-i18n="order_calc_fees">Handling Margins (10%)</span>
+                        <span id="th-res-markup" style="font-family: 'Playfair Display', serif; color: var(--text-dark);">0 MMK</span>
+                    </div>
+                    <div style="border-top: 1px dashed var(--frame-gold); margin-top: 1.5rem; padding-top: 1rem;">
+                        <span class="total-label" style="font-family: 'Playfair Display', serif; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted);" data-i18n="order_calc_total">Estimated Matrix Total:</span>
+                        <span id="th-res-total" class="total-amount" style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--text-dark); display: block; margin-top: 0.3rem;">0 MMK</span>
+                    </div>
+                </div>
+                
+                <div class="white-editorial-card">
+                    <h3 style="font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 400; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-dark); border-bottom: 1px solid var(--frame-gold); padding-bottom: 0.5rem;" data-i18n="order_th_services_title">Specialized Pipelines</h3>
+                    
+                    <div class="thai-whimsical-list">
+                        <a href="/addressth" class="thai-whimsical-node">
+                             <span data-i18n="thai_address">Exchange Subtotal</span>
+                            <span data-i18n="thai_address_desc">Exchange Subtotal</span>
+
+                        </a>
+                        <a href="/facebookth" class="thai-whimsical-node">
+                         <span data-i18n="thai_fb">Exchange Subtotal</span>
+                        <span data-i18n="thai_fb_desc">Exchange Subtotal</span>
+                        </a>
+
+                        <a href="/shopth" class="thai-whimsical-node">
+                            <span  data-i18n="thai_shop">Shopee Routing</span>
+                            <span  data-i18n="thai_shop_desc">browse securely across major digital storefronts.</span>
+                        </a>
+                        <a href="/pforward" class="thai-whimsical-node">
+                            <span  data-i18n="thai_pfoward">Direct Freight</span>
+                            <span  data-i18n="thai_pforward_desc">reception rrrs without active purchasing involvement.</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+       <footer class="site-footer fade-up delay-2">
+        <p data-i18n="global_footer_info">allnightthinkingofyou@gmail.com ❤︎⁠ located in yangon, myanmar</p>
+    </footer>
+
+    <script>
+        const YEN_TO_MMK_RATE = 32; 
+        const THB_TO_MMK_BASE = 136; 
+        let activeCountryContext = 'japan';
+        let manifestCart = [];
+
+
+        let currentSlideIndex = 0;
+        
+        function getSlidesPerView() {
+            if (window.innerWidth <= 620) return 1;
+            if (window.innerWidth <= 900) return 2;
+            return 3;
+        }
+
+        function updateCarouselPosition() {
+            const track = document.getElementById('carouselTrack');
+            const totalSlides = 5;
+            const slidesPerView = getSlidesPerView();
+            const maxIndex = totalSlides - slidesPerView;
+            
+            if (currentSlideIndex > maxIndex) currentSlideIndex = maxIndex;
+            if (currentSlideIndex < 0) currentSlideIndex = 0;
+
+            const slideItem = document.querySelector('.mirror-frame-link');
+            if (slideItem) {
+                const slideWidth = slideItem.getBoundingClientRect().width;
+                const computedStyle = window.getComputedStyle(track);
+                const gap = parseFloat(computedStyle.gap) || 0; 
+                const moveAmount = currentSlideIndex * (slideWidth + gap);
+                track.style.transform = `translateX(-${moveAmount}px)`;
+            }
+
+            const dots = document.querySelectorAll('.carousel-dots .dot');
+            dots.forEach((dot, index) => {
+                if (index === currentSlideIndex) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        function moveCarousel(direction) {
+            const totalSlides = 5;
+            const slidesPerView = getSlidesPerView();
+            const maxIndex = totalSlides - slidesPerView;
+            
+            currentSlideIndex += direction;
+            if (currentSlideIndex > maxIndex) currentSlideIndex = 0; 
+            if (currentSlideIndex < 0) currentSlideIndex = maxIndex;
+            
+            updateCarouselPosition();
+        }
+
+        function jumpToSlide(index) {
+            currentSlideIndex = index;
+            updateCarouselPosition();
+        }
+
+        let touchStartX = 0;
+        let touchEndX = 0;
+        const container = document.getElementById('carouselContainer');
+
+        container.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        container.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipeGesture();
+        }, { passive: true });
+
+        function handleSwipeGesture() {
+            if (touchStartX - touchEndX > 50) moveCarousel(1);
+            if (touchEndX - touchStartX > 50) moveCarousel(-1);
+        }
+
+        window.addEventListener('resize', updateCarouselPosition);
+        document.addEventListener("DOMContentLoaded", () => {
+            setTimeout(updateCarouselPosition, 150);
+        });
+
+        function proceedToCheckoutPage() {
+            const itemCount = document.getElementById('jp-summary-count').innerText;
+            if (itemCount === "0") {
+                alert("please add at least one item to your cart before checking out ♡");
+                return;
+            }
+            let cartSummaryText = manifestCart.map((item, index) => 
+                `Item ${index + 1}: ${item.link} (¥${item.price})`
+            ).join('\n');
+
+            const totalForeign = manifestCart.reduce((sum, item) => sum + item.price, 0);
+            const totalMMK = totalForeign * YEN_TO_MMK_RATE;
+            const formattedTotal = `${totalMMK.toLocaleString()} MMK`;
+
+            localStorage.setItem('cart_summary', cartSummaryText);
+            localStorage.setItem('order_total', formattedTotal);
+            
+            const btn = document.querySelector('#form-japan .proceed-btn');
+            if (btn) {
+                btn.innerText = 'REDIRECTING TO LEDGER...';
+                btn.style.opacity = '0.7';
+            }
+
+            setTimeout(() => {
+                const redirectUrl = `/checkout?cart_summary=${encodeURIComponent(cartSummaryText)}&order_total=${encodeURIComponent(formattedTotal)}`;
+                window.location.href = redirectUrl;
+            }, 800);
+        }
+
+        function selectCountry(country) {
+            activeCountryContext = country;
+            document.getElementById('step-1-screen').classList.add('hidden');
+            const step2 = document.getElementById('step-2-screen');
+            step2.classList.remove('hidden');
+            step2.classList.remove('screen-animate-trigger');
+            void step2.offsetWidth; 
+            step2.classList.add('screen-animate-trigger');
+            document.querySelectorAll('.country-form').forEach(f => f.classList.add('hidden'));
+            const titleElement = document.getElementById('current-country-title');
+            const subtitleElement = document.getElementById('step-2-subtitle');
+
+            if (country === 'japan') {
+                titleElement.innerText = "PARCEL ROUTING: JAPAN";
+                subtitleElement.innerText = "register items for checkout.";
+                document.getElementById('form-japan').classList.remove('hidden');
+                renderManifestItems();
+                calculateSummary();
+            } else if (country === 'thailand') {
+                titleElement.innerText = "PARCEL ROUTING: THAILAND";
+                subtitleElement.innerText = "live conversion estimates across localized marketplaces.";
+                document.getElementById('form-thailand').classList.remove('hidden');
+                calculateThailandLive();
+            }
+        }
+
+        function goBackToCountries() {
+            document.getElementById('step-2-screen').classList.add('hidden');
+            document.getElementById('step-1-screen').classList.remove('hidden');
+            setTimeout(updateCarouselPosition, 60);
+        }
+
+        function addItemToManifest(country) {
+            const linkInput = document.getElementById('jp-item-link');
+            const priceInput = document.getElementById('jp-item-price');
+            if (!linkInput.value || !priceInput.value) { alert('Please fill in coordinates.'); return; }
+            const nativePrice = parseFloat(priceInput.value);
+            if (isNaN(nativePrice) || nativePrice <= 0) { alert('Enter a valid amount.'); return; }
+
+            manifestCart.push({ id: Date.now(), country: 'japan', link: linkInput.value, price: nativePrice });
+            renderManifestItems();
+            calculateSummary();
+            linkInput.value = ''; priceInput.value = '';
+        }
+
+        function removeCartItem(id) {
+            manifestCart = manifestCart.filter(item => item.id !== id);
+            renderManifestItems();
+            calculateSummary();
+        }
+
+        function renderManifestItems() {
+            const container = document.getElementById('jp-cart-items-container');
+            if (!container) return;
+            container.innerHTML = '';
+            manifestCart.forEach(item => {
+                const row = document.createElement('div');
+                row.className = 'manifest-item-row';
+                row.innerHTML = `
+                    <div style="display:flex; flex-direction:column; max-width:75%;">
+                        <span style="color:var(--text-dark); font-family:'Playfair Display', serif; font-size:1rem; letter-spacing:0.02em;">¥${item.price.toLocaleString()}</span>
+                        <span class="manifest-item-url">${item.link}</span>
+                    </div>
+                    <button type="button" class="remove-item-btn" onclick="removeCartItem(${item.id})">[ Delete ]</button>
+                `;
+                container.appendChild(row);
+            });
+        }
+
+        function calculateSummary() {
+            const totalForeign = manifestCart.reduce((sum, item) => sum + item.price, 0);
+            document.getElementById('jp-summary-count').innerText = manifestCart.length;
+            document.getElementById('jp-summary-foreign').innerText = `¥${totalForeign.toLocaleString()}`;
+            document.getElementById('jp-summary-mmk').innerText = `${(totalForeign * YEN_TO_MMK_RATE).toLocaleString()} MMK`;
+        }
+
+        function calculateThailandLive() {
+            const priceVal = parseFloat(document.getElementById('th-calc-price').value) || 0;
+            const itemCostMMK = priceVal * THB_TO_MMK_BASE;
+            const markupMMK = itemCostMMK * 0.10;
+            document.getElementById('th-res-cost').innerText = `${itemCostMMK.toLocaleString()} MMK`;
+            document.getElementById('th-res-markup').innerText = `${markupMMK.toLocaleString()} MMK`;
+            document.getElementById('th-res-total').innerText = `${(itemCostMMK + markupMMK).toLocaleString()} MMK`;
+        }
+    </script>
+
+    <script src="/lang-switch.js"></script>
+    <script src="/site-header.js"></script>
+</body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n-title="page_title_contact">contact us • allnightthinkingofyou.store</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baskervville:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    
+    <script src="/lang-switch.js"></script>
+    <script src="/site-header.js"></script>
+    <link rel="stylesheet" href="/style.css">
+    
+    <style>
+         :root {
+            --ballet-pink-faint: #fff4f5;
+            --ballet-stripe: #fbeee0;
+            --crisp-white: #ffffff;
+            --frame-gold: #d5b4a9;
+            --text-dark: #4a3b39;
+            --text-muted: #8e7673;
+            
+            --pinstripe-pattern: linear-gradient(90deg, #ffffff 0px, #ffffff 6px, #fff5f6 6px, #fff5f6 12px);
+        }
+
+        body {
+            background-color: var(--bg-porcelain);
+            color: var(--text-dark);
+            font-family: 'Baskervville', serif;
+            font-size: 0.92rem;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .main-container {
+            max-width: 1100px;
+            margin: 4rem auto 6rem auto;
+            padding: 0 2rem;
+        }
+
+
+        .contact-wrapper { 
+            max-width: 850px; 
+            margin: 5rem auto; 
+            padding: 0 2rem; 
+            display: grid; 
+            grid-template-columns: 1.2fr 1fr; 
+            gap: 5rem; 
+            align-items: center;
+        }
+
+        @media (max-width: 768px) { 
+            .contact-wrapper { 
+                grid-template-columns: 1fr; 
+                gap: 3.5rem; 
+                margin: 3rem auto;
+            } 
+        }
+
+        .page-title { 
+            font-size: 2.2rem; 
+            font-weight: 400; 
+            color: var(--type-dusty-mauve); 
+            margin-bottom: 0.8rem; 
+            text-transform: lowercase;
+            font-style: italic;
+            letter-spacing: -0.01em;
+        }
+
+        .contact-subtitle { 
+            font-style: italic; 
+            color: var(--text-light-sepia); 
+            margin-bottom: 2.5rem; 
+            font-size: 0.85rem; 
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        .social-list { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 1.2rem; 
+        }
+
+        .social-row { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding-bottom: 0.7rem; 
+            border-bottom: 1px dashed var(--border-soft); 
+            text-decoration: none; 
+            color: var(--type-dusty-mauve); 
+            transition: all 0.3s ease;
+        }
+
+        .social-row:hover { 
+            border-bottom-color: var(--accent-antique-rose);
+            padding-left: 4px;
+        }
+
+        .social-row:hover .platform {
+            color: var(--accent-antique-rose);
+            font-style: italic;
+        }
+
+        .social-row:hover .handle {
+            color: var(--type-dusty-mauve);
+        }
+
+        .platform { 
+            font-size: 0.85rem; 
+            text-transform: lowercase;
+            transition: color 0.3s ease;
+        } 
+        
+        .handle { 
+            font-style: italic; 
+            font-size: 0.75rem; 
+            color: var(--text-light-sepia);
+        }
+
+        .mood-board { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            position: relative;
+        }
+
+        .polaroid-frame { 
+            background: #ffffff; 
+            padding: 1.2rem 1.2rem 2.8rem 1.2rem; 
+            box-shadow: 0 6px 20px rgba(184, 115, 116, 0.05); 
+            border: 1px solid var(--border-soft); 
+            transform: rotate(-1.5deg); 
+            width: 100%;
+            max-width: 290px; 
+            box-sizing: border-box;
+            position: relative;
+            cursor: pointer;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .photo-placeholder { 
+            width: 100%; 
+            aspect-ratio: 1 / 1;
+            background-color: var(--bg-porcelain); 
+            border: 1px solid rgba(235, 211, 213, 0.4);
+            background-size: cover; 
+            background-position: center; 
+        }
+
+        .polaroid-caption { 
+            font-family: 'Baskervville', serif; 
+            font-style: italic; 
+            font-size: 0.75rem; 
+            text-align: center; 
+            margin-top: 1.2rem; 
+            color: var(--text-light-sepia); 
+            line-height: 1.4;
+            text-transform: lowercase;
+            display: block;
+        }
+
+        .pop-particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 2000;
+            will-change: transform, opacity;
+            animation: burstAndFloat 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        @keyframes burstAndFloat {
+            0% {
+                transform: translate(-50%, -50%) scale(0.4) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(calc(-50% + var(--target-x)), calc(-50% + var(--target-y))) scale(1.1) rotate(var(--target-angle));
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="global-header" class="site-header fade-up"></header>
+    
+    <main class="contact-wrapper fade-up delay-1">
+        <div>
+            <h1 class="page-title" data-i18n="contact_title">leave a trace.</h1>
+            <p class="contact-subtitle" data-i18n="contact_subtitle">i operate this service between my university classes, but i always try my best to reply as swiftly as possible. reach out if you have questions about an order, a specific item, or just want to say hi ♡</p>
+            
+            <div class="social-list">
+                <a href="https://www.t.me/allnightthinkingofyou" class="social-row">
+                    <span class="platform" data-i18n="contact_tg_label">our official telegram channel</span>
+                    <span class="handle">@allnightthinkingofyou</span>
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=61586968906190" class="social-row">
+                    <span class="platform" data-i18n="contact_fb_label">our official facebook page</span>
+                    <span class="handle">all night thinking of you</span>
+                </a>
+                <a href="https://www.tiktok.com/@allnightthinkingofyou" class="social-row">
+                    <span class="platform" data-i18n="contact_tt_label">our official tiktok account ! </span>
+                    <span class="handle">@allnightthinkingofyou</span>
+                </a>
+                <a href="https://t.me/allnightthinkingofu" class="social-row">
+                    <span class="platform" data-i18n="contact_tele_label">our telegram acc ! </span>
+                    <span class="handle">@allnightthinkingofu</span>
+                </a>
+            </div>
+        </div>
+        
+        <div class="mood-board">
+            <div class="polaroid-frame" id="clover-trigger">
+                <div class="photo-placeholder" style="background-image: url(https://i.redd.it/cards-for-the-event-lets-stream-together-wedding-live-v0-lpfu2na2go3d1.jpg?width=2048&format=pjpg&auto=webp&s=193ef50a15ce37aec846e9299ec9e261f14d02c3);"></div>
+                <span class="polaroid-caption">pat minori's head for goodluck!</span>
+            </div>
+        </div>
+    </main>
+    
+    <footer class="site-footer fade-up delay-2">
+        <p data-i18n="global_footer_info">allnightthinkingofyou@gmail.com ❤︎⁠ located in yangon, myanmar</p>
+    </footer>
+
+    <script>
+        document.getElementById('clover-trigger').addEventListener('click', function(e) {
+            
+            const yourCustomSound = new Audio('pop.mp3'); 
+            yourCustomSound.play().catch(err => {
+                console.log("Audio couldn't play. Double-check your file path or filename spelling!", err);
+            });
+
+            // 2. Particle Engine (Three-leaf clovers + Pink Confetti)
+            const particleCount = 12; 
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'pop-particle';
+                
+                if (Math.random() > 0.5) {
+                    particle.textContent = '☘️';
+                    particle.style.fontSize = (1 + Math.random() * 0.6) + 'rem';
+                } else {
+                    particle.style.width = (5 + Math.random() * 6) + 'px';
+                    particle.style.height = (5 + Math.random() * 6) + 'px';
+                    
+                    const pinkShades = ['#ffccd5', '#ffb3c1', '#ffc6ff', '#fbc4ab', '#ff9aa2'];
+                    particle.style.backgroundColor = pinkShades[Math.floor(Math.random() * pinkShades.length)];
+                    particle.style.borderRadius = Math.random() > 0.5 ? '50%' : '1px'; 
+                }
+                
+                particle.style.left = e.clientX + 'px';
+                particle.style.top = e.clientY + 'px';
+                
+                const targetX = (Math.random() - 0.5) * 160 + 'px';
+                const targetY = (-50 - Math.random() * 110) + 'px';
+                const targetAngle = (Math.random() - 0.5) * 540 + 'deg';
+                
+                particle.style.setProperty('--target-x', targetX);
+                particle.style.setProperty('--target-y', targetY);
+                particle.style.setProperty('--target-angle', targetAngle);
+                
+                document.body.appendChild(particle);
+                
+                particle.addEventListener('animationend', function() {
+                    particle.remove();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
