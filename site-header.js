@@ -7,22 +7,57 @@ async function initializeGlobalHeader() {
     if (!headerContainer) return;
 
     try {
-        // 🎀 Fetches header.html from the exact same directory as this script, universally!
+        // 🎀 Fetches header.html from the exact same directory as this script
         const response = await fetch(`${scriptDirectory}/header.html`);
         if (!response.ok) throw new Error('Header resource load failed');
         headerContainer.innerHTML = await response.text();
 
-        // Bind language button clicks dynamically
+        // ==========================================
+        // 1. LANGUAGE BUTTON TOGGLE & CLICK-AWAY LOGIC
+        // ==========================================
+        const langTrigger = headerContainer.querySelector('.lang-bookmark-trigger');
+        const langTabFace = headerContainer.querySelector('.lang-bookmark-tab-face');
+        const langContent = headerContainer.querySelector('.lang-bookmark-content');
+        
+        if (langTrigger && langTabFace) {
+            // Open/Close on tap
+            langTabFace.addEventListener('click', (e) => {
+                e.stopPropagation();
+                langTrigger.classList.toggle('active-dropdown');
+            });
+            
+            // Prevent clicks inside the menu from closing it
+            if (langContent) {
+                langContent.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                });
+            }
+        }
+
+        // Tap anywhere outside to quit the UI completely
+        document.addEventListener('click', (e) => {
+            if (langTrigger && !langTrigger.contains(e.target)) {
+                langTrigger.classList.remove('active-dropdown');
+            }
+        });
+
+        // ==========================================
+        // 2. LANGUAGE TRANSLATION BINDINGS
+        // ==========================================
         headerContainer.querySelectorAll('.lang-pill-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 const lang = btn.getAttribute('data-lang');
                 if (window.setLanguage) {
                     window.setLanguage(lang);
+                    // Optional: Automatically close the dropdown after picking a language
+                    langTrigger.classList.remove('active-dropdown'); 
                 }
             });
         });
 
-        // Set active state on current page link
+        // ==========================================
+        // 3. NAVIGATION ACTIVE STATES
+        // ==========================================
         let currentPath = window.location.pathname.toLowerCase();
         if (currentPath.endsWith('/')) currentPath = currentPath.slice(0, -1);
         if (currentPath === '' || currentPath === '/index.html') currentPath = '/';
@@ -32,23 +67,11 @@ async function initializeGlobalHeader() {
             link.classList.toggle('active', dataPage && dataPage.toLowerCase() === currentPath);
         });
 
-        // Setup sidebar hover/click logic
-        const hoverZone = headerContainer.querySelector('.sidebar-hover-zone');
-        const trigger = headerContainer.querySelector('.sidebar-trigger');
-        if (trigger && hoverZone) {
-            trigger.addEventListener('click', (e) => {
-                e.stopPropagation();
-                hoverZone.classList.toggle('open');
-            });
-            document.addEventListener('click', (e) => {
-                if (!hoverZone.contains(e.target)) hoverZone.classList.remove('open');
-            });
-        }
-
         // Apply translations once header loads
         if (window.applyTranslations) {
             window.applyTranslations(window.getLang());
         }
+
     } catch (error) {
         console.error('Error loading header:', error);
     }
