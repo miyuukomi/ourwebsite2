@@ -380,6 +380,13 @@
                         <div class="order-meta-card" style="margin-bottom: 2rem; border-bottom: 1px solid var(--border-soft); padding-bottom: 1rem;">
                             <h2 style="font-size: 1.25rem; font-weight: 400; color: var(--text-sepia); text-transform: lowercase; letter-spacing: -0.01em;">${trackingHeaderLabel}${matchedRecord.trackingCode}</h2>
                             <span style="font-size:0.8rem; color: var(--text-light-sepia); opacity:0.6; font-style: italic;">${trackingUpdateLabel}${matchedRecord.lastdate || fallbackTime}${matchedRecord.lasttime ? ` ${atLabel}${matchedRecord.lasttime}` : ''}</span>
+                            
+                            ${(matchedRecord.recipient || matchedRecord.item) ? `
+                            <div style="margin-top: 0.9rem; padding-top: 0.7rem; border-top: 1px dashed rgba(184, 115, 120, 0.2); font-size: 0.85rem; color: var(--text-sepia); line-height: 1.45;">
+                                ${matchedRecord.recipient ? `<div><span style="opacity: 0.5; font-style: italic;">dear: </span>${String(matchedRecord.recipient).toLowerCase()}</div>` : ''}
+                                ${matchedRecord.item ? `<div style="margin-top: 0.15rem;"><span style="opacity: 0.5; font-style: italic;">parcel: </span>${String(matchedRecord.item).toLowerCase()}</div>` : ''}
+                            </div>
+                            ` : ''}
                         </div>
                         ${structuralTimelineMarkup}
                     </div>
