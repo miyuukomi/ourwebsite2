@@ -1100,7 +1100,7 @@ html[lang="zh"], html[lang="zh"] * { font-family: 'ChineseLocal', sans-serif; fo
 
         /* Changes from fixed to sticky so the banner can scroll away naturally */
         #global-header {
-            position: sticky;
+            position: relative;
             top: 0;
             left: 0;
             width: 100%;
@@ -1145,3 +1145,57 @@ html[lang="zh"], html[lang="zh"] * { font-family: 'ChineseLocal', sans-serif; fo
                 transform: translate3d(-50%, 0, 0);
             }
         }
+
+.orders-closed-box {
+    background-color: #ffffff;
+    border: 1px solid var(--clr-vanilla-linen);
+    border-radius: 16px;
+    padding: 24px;
+    max-width: 960px;
+    
+    /* CHANGED: 0 margin on top, 2rem on the bottom to cleanly push the nav bar down */
+    margin: 0 auto 2rem auto; 
+    
+    box-shadow: 0 6px 20px rgba(144, 118, 109, 0.06);
+    font-family: 'Baskervville', serif;
+    color: var(--type-dusty-mauve);
+    text-align: left;
+}
+
+.closed-box-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Clean breathing room between elements */
+}
+
+.closed-box-accent {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.orders-closed-box strong {
+    font-size: 1.15rem;
+    font-weight: 400; /* Baskervville looks gorgeous and elegant at normal weight */
+    line-height: 1.4;
+}
+
+.closed-box-sub {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+    opacity: 0.9; /* Keeps the body text gentle and easy on the eyes */
+}
+
+/* Mobile Responsiveness Adjustment */
+@media (max-width: 900px) {
+    .orders-closed-box {
+        margin: 1.5rem 1rem;
+        padding: 20px;
+    }
+    .orders-closed-box strong {
+        font-size: 1.05rem;
+    }
+}
