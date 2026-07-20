@@ -1,4 +1,15 @@
 <header class="top-header-navigation">
+    <!-- Urgent Closed Notice Banner -->
+    <div class="orders-closed-banner">
+        <div class="closed-banner-content">
+            <span class="closed-banner-accent">♡ notice:</span> 
+            <strong>orders are temporarily closed until july 24th, 2026 (˶′◡′˶)</strong>
+            <span class="closed-banner-sub">
+                we are currently away on vacation, so new orders are paused for now. please note that only one admin is available to handle urgent requests. thank you for understanding! ✦
+            </span>
+        </div>
+    </div>
+
     <div class="header-inner">
         <div class="sidebar-brand" data-i18n="sidebar_brand">happy shopping (˶◜ᵕ◝˶)</div>
         
@@ -34,29 +45,3 @@
         </div>  
     </div>
 </header>
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    const trigger = document.querySelector('.lang-bookmark-trigger');
-    const tabFace = document.querySelector('.lang-bookmark-tab-face');
-    
-    if (trigger && tabFace) {
-        tabFace.addEventListener('click', (e) => {
-            e.stopPropagation();
-            trigger.classList.toggle('active-dropdown');
-        });
-        
-        const content = document.querySelector('.lang-bookmark-content');
-        if (content) {
-            content.addEventListener('click', (e) => {
-                e.stopPropagation();
-            });
-        }
-    }
-    document.addEventListener('click', (e) => {
-        if (trigger && !trigger.contains(e.target)) {
-            trigger.classList.remove('active-dropdown');
-        }
-    });
-});
-</script>
